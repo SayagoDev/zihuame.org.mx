@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  overflow-x: clip;
+  max-width: 100vw;
+}
+
+/* Ocultar scrollbar pero mantener funcionalidad */
+html {
+  /* Firefox */
+  scrollbar-width: none;
+  /* IE y Edge */
+  -ms-overflow-style: none;
+}
+
+/* Chrome, Safari y Opera */
+html::-webkit-scrollbar {
+  display: none;
+}
+
+@theme {
+  --font-gill-sans: var(--font-gill-sans), "Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS", sans-serif;
+  --font-komet: var(--font-komet), "Arial Black", "Arial Bold", "Arial", sans-serif;
+  --font-inter: var(--font-inter), "Inter", "sans-serif";
+
+  --breakpoint-3xl: 115rem; /* 1840px */
+
+  --py-15: 3.75rem;
+  --color-base-50: hsl(0 0% 99%);
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+  
+  @media (width >= 48rem) {
+    padding-inline: 3rem;
+  }
+  
+  @media (width >= 64rem) {
+    padding-inline: 5rem;
+  }
+}
+
+@plugin "daisyui" {
+  themes: false;
+  root: ":root";
+  include: ;
+  exclude: ;
+  prefix: ;
+  logs: true;
+}
+
+@plugin "daisyui/theme" {
+  name: "zihuame";
+  default: true;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: hsl(42 27% 95%);
+  --color-base-200: hsl(42 27% 90%);
+  --color-base-300: hsl(42 27% 80%);
+  --color-base-content: hsl(120 11% 2%);
+  --color-black: hsl(120 11% 2%);
+  --color-black-content: hsl(42 27% 95%);
+  --color-primary: hsl(199 57% 53%);
+  --color-primary-content: hsl(42 27% 95%);
+  --color-secondary: hsl(25 100% 49%);
+  --color-secondary-content: hsl(42 27% 95%);
+  --color-accent: hsl(53 100% 50%);
+  --color-accent-content: hsl(120 11% 2%);
+  --color-neutral: hsl(42 27% 90%);
+  --color-neutral-content: hsl(120 11% 2%);
+  --color-info: hsl(199 57% 53%);
+  --color-info-content: hsl(120 11% 2%);
+  --color-success: hsl(67 91% 47%);
+  --color-success-content: hsl(120 11% 2%);
+  --color-warning: hsl(25 100% 49%);
+  --color-warning-content: hsl(120 11% 2%);
+  --color-error: hsl(356 95% 46%);
+  --color-error-content: hsl(120 11% 2%);
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+.btn {
+  @apply font-inter font-bold;
+}
+
+#desktop-menu li > * {
+  @apply pb-0;
+}
+#desktop-menu summary {
+  @apply pb-0 align-middle;
+}
+#desktop-menu summary::after {
+  @apply mb-1;
+}
+
+#mobile-menu li > * {
+  @apply pb-0;
+}
+#mobile-menu summary {
+  @apply pb-0;
+}
+#mobile-menu summary::after {
+  @apply mb-1;
+}
+
+.btn-link {
+  text-decoration-line: none;
+}
+.btn-link:is(.btn-active¸ :hover, :active:focus, :focus-visible) {
+  text-decoration-line: none;
+}
+
+/* #popup {
+  display: none;
+}
+.t-save:hover #popup {
+  display: block;
+}
+.safety:hover + #popup {
+  display: block;
+}
+.safety {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 15px;
+  left: 0;
+  top: 0;
+  background-color: rgba(150, 0, 0, 0.15);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+.t-save:hover #safety {
+  display: block;
+} */
+
+
+.t-save::before {
+  display: none;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 55px;
+  transform: translateY(50%);
+  /* background-color: rgba(150, 0, 0, 0.15); */
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+}
+
+.t-save:hover::before,
+.t-save-active::before {
+  display: block;
+}
+
+.informes-container::-webkit-scrollbar {
+  display: none;
+}
+.informes-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+@keyframes a-bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02) translateY(-1px);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes a-down {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
