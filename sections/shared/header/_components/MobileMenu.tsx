@@ -1,6 +1,8 @@
+import { EventDTO } from "@/data/events";
 import { closeMenu } from "@/lib/close-menu";
+import Link from "next/link";
 
-export default function MobileMenu() {
+export default function MobileMenu({ events }: { events: EventDTO[] }) {
   return (
     <div
       className="dropdown absolute lg:hidden"
@@ -68,14 +70,14 @@ export default function MobileMenu() {
                 </a>
               </li>
               <li role="none">
-                <a
+                <Link
                   href="/#informes"
                   className="truncate"
                   role="menuitem"
                   tabIndex={-1}
                 >
                   Informes
-                </a>
+                </Link>
               </li>
             </ul>
           </details>
@@ -86,6 +88,22 @@ export default function MobileMenu() {
               Intervención
             </summary>
             <ul role="menu" aria-label="Servicios">
+              <li role="none">
+                <details>
+                  <summary role="menuitem" aria-haspopup="true">
+                    Eventos
+                  </summary>
+                  <ul role="menu" aria-label="Eventos">
+                    {events.map((event) => (
+                      <li role="none" key={event.id}>
+                        <a href={`/eventos/${event.slug}`} role="menuitem">
+                          <span className="truncate">{event.title}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </li>
               <li role="none">
                 <a href="/educacion" onClick={closeMenu} role="menuitem">
                   Educación

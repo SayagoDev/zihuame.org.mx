@@ -8,7 +8,6 @@ export default async function Carousel() {
   const events = await new EventService().getEventsCarouselData();
   const autoPlayInterval = 3000;
 
-  // Transform EventCarouselDTO[] to CarouselImage[]
   const images: CarouselImage[] = events.map((event) => ({
     src: event.imageUrl,
     alt: event.title,

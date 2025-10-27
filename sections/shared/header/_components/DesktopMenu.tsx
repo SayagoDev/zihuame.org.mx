@@ -2,8 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import { closeMenu } from "@/lib/close-menu";
+import { EventDTO } from "@/data/events";
+import Link from "next/link";
 
-export default function DesktopMenu() {
+export default function DesktopMenu({ events }: { events: EventDTO[] }) {
   const menuRef = useRef<HTMLDivElement>(null);
 
   const closeAllMenus = () => {
@@ -54,7 +56,7 @@ export default function DesktopMenu() {
         if (isInSubmenu) {
           event.preventDefault();
           const menuItems = Array.from(
-            isInSubmenu.querySelectorAll('a[role="menuitem"]')
+            isInSubmenu.querySelectorAll('a[role="menuitem"]'),
           ) as HTMLElement[];
           const currentIndex = menuItems.indexOf(target);
 
@@ -101,7 +103,7 @@ export default function DesktopMenu() {
         // Enfocar el primer elemento del submenú cuando se abre
         if (details.open) {
           const firstMenuItem = details.querySelector(
-            'ul[role="menu"] a[role="menuitem"]'
+            'ul[role="menu"] a[role="menuitem"]',
           ) as HTMLElement;
           if (firstMenuItem) {
             setTimeout(() => firstMenuItem.focus(), 0);
@@ -195,14 +197,14 @@ export default function DesktopMenu() {
                 </a>
               </li>
               <li role="none">
-                <a
+                <Link
                   href="/#informes"
                   className="truncate"
                   role="menuitem"
                   tabIndex={-1}
                 >
                   Informes
-                </a>
+                </Link>
               </li>
             </ul>
           </details>
@@ -223,6 +225,22 @@ export default function DesktopMenu() {
               role="menu"
               aria-label="Servicios"
             >
+              <li>
+                <details>
+                  <summary role="menuitem" aria-haspopup="true">
+                    Eventos
+                  </summary>
+                  <ul role="menu" aria-label="Eventos">
+                    {events.map((event) => (
+                      <li role="none" key={event.id}>
+                        <a href={`/eventos/${event.slug}`} role="menuitem">
+                          <span className="truncate">{event.title}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </li>
               <li role="none">
                 <a href="/educacion" className="" role="menuitem" tabIndex={-1}>
                   Educación

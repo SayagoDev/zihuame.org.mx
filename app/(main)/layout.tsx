@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/sections/shared/header";
 import { SanityLive } from "@/sanity/lib/live";
+import { EventService } from "@/data/events";
 
 const gillSans = localFont({
   src: [
@@ -67,17 +68,18 @@ export const metadata: Metadata = {
     "Zihuame Mochilla es una organización sin fines de lucro dedicada a transformar vidas a través de la educación, brindando oportunidades de desarrollo y crecimiento a comunidades vulnerables.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const events = await new EventService().getEventsForNav();
   return (
     <html lang="es">
       <body
         className={`${gillSans.variable} ${komet.variable} ${inter.variable} font-gill-sans`}
       >
-        <Header />
+        <Header events={events} />
         {children}
         <SanityLive />
       </body>

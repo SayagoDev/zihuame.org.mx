@@ -6,8 +6,9 @@ import MobileMenu from "./_components/MobileMenu";
 import { useEffect, useState } from "react";
 import Break from "@/components/Break";
 import ButtonLine from "@/components/ButtonLine";
+import { EventDTO } from "@/data/events";
 
-export default function Header() {
+export default function Header({ events }: { events: EventDTO[] }) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -24,7 +25,7 @@ export default function Header() {
   return (
     <>
       <header className="container max-w-full py-2 md:py-4 flex justify-between items-center relative">
-        <MobileMenu />
+        <MobileMenu events={events} />
         <div className="flex-1 flex justify-center lg:justify-start">
           <Logo
             width={115}
@@ -33,7 +34,7 @@ export default function Header() {
           />
         </div>
         <div className="hidden lg:flex lg:justify-end lg:gap-6 2xl:gap-[180px] align-baseline">
-          <DesktopMenu />
+          <DesktopMenu events={events} />
           <ButtonLine href="#">Quiero Donar</ButtonLine>
         </div>
         <ButtonLine

@@ -152,17 +152,12 @@ export default function CarouselSlider({
   // Helper para renderizar imagen con o sin enlace
   const renderImage = (image: CarouselImage) => {
     const imgElement = (
-      <img src={image.src} alt={image.alt} className="w-full h-auto" />
+      <img src={image.src} alt={image.alt} className="w-full max-h-[400px]" />
     );
 
     if (image.url) {
       return (
-        <a
-          href={image.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block w-full h-full cursor-pointer"
-        >
+        <a href={image.url} className="block w-full h-full cursor-pointer">
           {imgElement}
         </a>
       );

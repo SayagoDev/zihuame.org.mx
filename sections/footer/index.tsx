@@ -1,10 +1,11 @@
 import Break from "@/components/Break";
 import Button from "@/components/Button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-success rounded-t-xl lg:rounded-xl lg:m-4 p-2 xl:px-[3.75rem] xl:pt-[2.31rem] xl:pb-[5.31rem]">
+    <footer className="bg-success rounded-t-xl lg:rounded-xl lg:m-4 lg:mb-[30px] p-2 xl:px-15 xl:pt-[2.31rem] xl:pb-[5.31rem]">
       <div className="flex flex-col lg:flex-row items-start p-4 sm:px-10 lg:p-0 lg:justify-between relative lg:gap-4 @container">
         <div className="flex items-center gap-2 mt-2 mx-auto lg:gap-0 lg:mx-0">
           <Image
@@ -94,9 +95,12 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/#eventos" className="link link-hover block truncate">
+                <Link
+                  href="/#eventos"
+                  className="link link-hover block truncate"
+                >
                   Eventos
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
