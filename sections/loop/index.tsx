@@ -1,31 +1,12 @@
-"use client";
-
 import Button from "@/components/Button";
 import SimpleMarquee from "@/components/fancy/blocks/simple-marquee";
+import { StatsService } from "@/data/stats";
 import { cn } from "@/lib/utils/cn";
 
-interface LoopProps {
-  separator?: string;
-  separatorColor?: string;
-  className?: string;
-}
+export default async function Loop({ className }: { className?: string }) {
+  const { communities, separator, separatorColor } =
+    await new StatsService().getStatsData();
 
-const cultures = [
-  { name: "Otomí", color: "#8DC63E" },
-  { name: "Nahua", color: "#6AB7E6" },
-  { name: "Mixteca", color: "#DD65A5" },
-  { name: "Tsotsil", color: "#EFDE2E" },
-  { name: "Tének", color: "#9B89C0" },
-  { name: "Totonaca", color: "#00B3D8" },
-  { name: "Mazahua", color: "#F1C7D5" },
-  { name: "Huasteca", color: "#E26D2F" },
-];
-
-export default function Loop({
-  separator = "✦",
-  separatorColor = "#FDE000",
-  className,
-}: LoopProps) {
   return (
     <section
       className="py-6 flex flex-col items-center gap-8 md:gap-12"
@@ -44,17 +25,17 @@ export default function Loop({
         scrollAwareDirection={true}
         className={cn(
           "text-3xl md:text-4xl xl:text-[4rem] font-komet font-extrabold",
-          className
+          className,
         )}
       >
         <div className="flex items-center gap-4 whitespace-nowrap">
-          {cultures.map((culture, index) => (
+          {communities.map((culture, index) => (
             <>
               <span
                 key={index}
                 className={cn(
                   `inline-flex items-center`,
-                  index === 0 && "ml-4"
+                  index === 0 && "ml-4",
                 )}
                 style={{ color: culture.color }}
               >

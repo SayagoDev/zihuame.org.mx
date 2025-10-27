@@ -48,7 +48,7 @@ export function DataCount({
           separator={separator}
           className={cn(
             "font-komet font-extrabold text-4xl text-shadow-2xs text-shadow-base-content/50",
-            className
+            className,
           )}
         />
       </div>

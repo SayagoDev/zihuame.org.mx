@@ -8,13 +8,21 @@ import AreasOfIntervention from "@/sections/areas-of-intervention";
 import AnnualReports from "@/sections/annual-reports";
 import Allies from "@/sections/allies";
 import Footer from "@/sections/footer";
+import { StatsService } from "@/data/stats";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { year, peopleAttended, womenAttended, menAttended } =
+    await new StatsService().getStatsData();
   return (
     <>
       <Home />
       <Intro />
-      <Stats />
+      <Stats
+        year={year}
+        peopleAttended={peopleAttended}
+        womenAttended={womenAttended}
+        menAttended={menAttended}
+      />
       <Loop />
       <Carousel />
       <Banner />

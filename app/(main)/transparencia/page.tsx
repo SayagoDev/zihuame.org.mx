@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function TransparencyPage() {
   return (
     <>
-      <main className="container max-w-full py-12 md:py-16 lg:py-20 xl:py-[7.5rem]">
+      <main className="container max-w-full py-12 md:py-16 lg:py-20 xl:py-30">
         <section>
           <article className="flex flex-col items-center text-center max-w-[1200px] mx-auto">
             <h1 className="text-3xl xl:text-5xl font-komet font-extrabold">
@@ -16,28 +16,28 @@ export default function TransparencyPage() {
               En Zihuame Mochilla, la confianza es la base de nuestro trabajo.
               Creemos que la transparencia no es solo una obligación, sino una
               herramienta para mostrar cómo cada apoyo se convierte en un
-              impacto real y medible. Aquí te mostramos el "porqué" y el "cómo"
+              impacto real y medible. Aquí te mostramos el «porqué» y el «cómo»
               de nuestra labor.
             </p>
           </article>
-          <article className="mt-8 xl:mt-[7.5rem]">
+          <article className="mt-8 xl:mt-30">
             <Heading>Nuestra Hipótesis de Cambio</Heading>
             <Image
               src="/images/transparency/hipotesis_de_cambio.png"
               alt="Hipótesis de Cambio"
               width={1000}
               height={1000}
-              className="mt-[3.75rem] mx-auto"
+              className="mt-15 mx-auto"
             />
           </article>
-          <article className="mt-8 xl:mt-[7.5rem]">
+          <article className="mt-8 xl:mt-30">
             <Heading>Nuestro Modelo de Intervención</Heading>
             <Image
               src="/images/transparency/estructura_analitica.png"
               alt="Hipótesis de Cambio"
               width={1000}
               height={1000}
-              className="mt-[3.75rem] mx-auto"
+              className="mt-15 mx-auto"
             />
           </article>
         </section>

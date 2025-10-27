@@ -74,7 +74,7 @@ export default function CarouselSlider({
   const prevSlide = () => {
     if (isAnimatingRef.current) return;
     setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length,
     );
   };
 

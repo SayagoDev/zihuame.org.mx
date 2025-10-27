@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/sections/shared/header";
+import { SanityLive } from "@/sanity/lib/live";
 
 const gillSans = localFont({
   src: [
@@ -78,6 +79,7 @@ export default function RootLayout({
       >
         <Header />
         {children}
+        <SanityLive />
       </body>
     </html>
   );
