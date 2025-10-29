@@ -1,6 +1,18 @@
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
-import { Intro } from "@/sanity.types";
+
+// Tipos específicos para la respuesta de la query
+type IntroQueryResponse = {
+  mission: {
+    title: string;
+    description: string;
+    description2?: string;
+  };
+  button: {
+    text: string;
+    url: string;
+  };
+};
 
 interface IntroDTO {
   missionTitle: string;
@@ -10,13 +22,13 @@ interface IntroDTO {
   buttonUrl: string;
 }
 
-function mapIntroToDTO(intro: Intro): IntroDTO {
+function mapIntroToDTO(intro: IntroQueryResponse): IntroDTO {
   return {
-    missionTitle: intro.mission?.title || "",
-    missionDes: intro.mission?.description || "",
-    missionDes2: intro.mission?.description2 || "",
-    buttonLabel: intro.button?.text || "",
-    buttonUrl: intro.button?.url || "https://zihuame.org.mx/#donar",
+    missionTitle: intro.mission.title,
+    missionDes: intro.mission.description,
+    missionDes2: intro.mission.description2,
+    buttonLabel: intro.button.text,
+    buttonUrl: intro.button.url,
     // year: stats.year || new Date().getFullYear(),
     // totalAttended: stats.totalPeople || 0,
     // womenAttended: stats.womenAttended || 0,
@@ -41,7 +53,7 @@ class IntroDAL {
         query: INTRO_DATA,
       });
 
-      return mapIntroToDTO(introData.data);
+      return mapIntroToDTO(introData.data as IntroQueryResponse);
     } catch (error) {
       console.error("Error fetching home data:", error);
       // Return a default HomeDTO object when there's an error

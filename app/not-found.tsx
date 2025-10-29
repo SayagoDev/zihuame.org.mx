@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Inter } from "next/font/google";
-import Image from "next/image";
 import Button from "@/components/Button";
-import ButtonLine from "@/components/ButtonLine";
 import Footer from "@/sections/footer";
-import Break from "@/components/Break";
 import Header from "@/sections/shared/header";
 import { EventService } from "@/data/events";
 import { SanityLive } from "@/sanity/lib/live";

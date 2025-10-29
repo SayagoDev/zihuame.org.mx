@@ -6,7 +6,6 @@ import { ReportService } from "@/data/reports";
 
 export default async function AnnualReports() {
   const reports = await new ReportService().getAllReports();
-  console.log(reports);
   return (
     <section id="informes" className="container max-w-full py-12 md:py-16 ">
       <Heading>Informe Anual</Heading>

@@ -140,7 +140,7 @@ export default function MobileMenu({ events }: { events: EventDTO[] }) {
               </li>
               <li role="none">
                 <a
-                  href="/empoderamiento-económico"
+                  href="/empoderamiento-economico"
                   onClick={closeMenu}
                   role="menuitem"
                 >

@@ -1,7 +1,26 @@
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
-import { Report } from "@/sanity.types";
-import { imageUrl } from "@/lib/imageUrl";
+
+// Tipos específicos para la respuesta de la query
+type ReportQueryResponse = {
+  _id: string;
+  title: string;
+  pdf: {
+    asset: {
+      url: string;
+    };
+  };
+  image?: {
+    img?: {
+      asset?: {
+        url: string;
+      };
+    };
+    shadow?: {
+      hex: string;
+    };
+  };
+};
 
 export interface ReportDTO {
   id: string;
@@ -11,13 +30,13 @@ export interface ReportDTO {
   shadowColor?: string;
 }
 
-function mapReportToDTO(report: Report): ReportDTO {
+function mapReportToDTO(report: ReportQueryResponse): ReportDTO {
   return {
     id: report._id,
-    pdfUrl: report.pdf?.asset?.url,
-    title: report.title || "",
+    pdfUrl: report.pdf.asset.url,
+    title: report.title,
     imgUrl: report.image?.img?.asset?.url,
-    shadowColor: report.image?.shadow?.hex || "",
+    shadowColor: report.image?.shadow?.hex,
   };
 }
 
@@ -49,7 +68,9 @@ class ReportDAL {
         query: ALL_REPORTS_QUERY,
       });
 
-      return reports.data.map(mapReportToDTO);
+      return reports.data.map((report) =>
+        mapReportToDTO(report as ReportQueryResponse),
+      );
     } catch (error) {
       console.error("Error fetching reports data:", error);
       return [];

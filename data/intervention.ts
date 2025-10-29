@@ -1,8 +1,41 @@
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
-import { Intervention } from "@/sanity.types";
 import { imageUrl } from "@/lib/imageUrl";
 
+// Tipos específicos para la respuesta de la query
+type InterventionQueryCommunity = {
+  name: string;
+  color: {
+    hex: string;
+  };
+};
+
+type InterventionQueryGallery = {
+  asset?: {
+    _ref: string;
+  };
+  _key: string;
+};
+
+type InterventionQueryResponse = {
+  _id: string;
+  name: string;
+  slug: {
+    current: string;
+  };
+  image?: {
+    asset?: {
+      _ref: string;
+    };
+  };
+  description: string;
+  buttonText: string;
+  peopleAttendance?: number;
+  communitiesAttended?: InterventionQueryCommunity[];
+  gallery?: InterventionQueryGallery[];
+};
+
+// DTOs para la capa de presentación
 type Community = {
   name: string;
   color: string;
@@ -24,21 +57,24 @@ export interface InterventionDTO {
   gallery?: Gallery[];
 }
 
-function mapInterventionToDTO(intervention: Intervention): InterventionDTO {
+function mapInterventionToDTO(
+  intervention: InterventionQueryResponse,
+): InterventionDTO {
   return {
     id: intervention._id,
-    title: intervention.name || "",
-    slug: intervention.slug?.current || "",
+    title: intervention.name,
+    slug: intervention.slug.current,
     imageUrl: intervention.image?.asset?._ref
       ? imageUrl(intervention.image.asset).url()
       : "",
-    description: intervention.description || "",
-    buttonLabel: intervention.buttonText || "",
+    description: intervention.description,
+    buttonLabel: intervention.buttonText,
     peopleAttendance: intervention.peopleAttendance,
-    communities: intervention.communitiesAttended?.map((community) => ({
-      name: community.name,
-      color: community.color.hex,
-    })),
+    communities:
+      intervention.communitiesAttended?.map((community) => ({
+        name: community.name,
+        color: community.color.hex,
+      })) || [],
     gallery:
       intervention.gallery?.map((gallery) => ({
         url: gallery.asset?._ref ? imageUrl(gallery.asset).url() : "",
@@ -64,7 +100,9 @@ class InterventionDAL {
         params: { slug },
       });
 
-      return mapInterventionToDTO(interventions.data);
+      return mapInterventionToDTO(
+        interventions.data as InterventionQueryResponse,
+      );
     } catch (error) {
       console.error("Error fetching interventions data:", error);
       return {

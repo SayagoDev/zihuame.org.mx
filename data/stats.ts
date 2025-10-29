@@ -1,6 +1,28 @@
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
-import { Stats } from "@/sanity.types";
+
+// Tipos específicos para la respuesta de la query
+type StatsQueryCommunity = {
+  _key: string;
+  name: string;
+  color: {
+    hex: string;
+  };
+};
+
+type StatsQueryResponse = {
+  year: number;
+  totalPeople: number;
+  womenAttended: number;
+  menAttended: number;
+  communitiesAttended: StatsQueryCommunity[];
+  separator: {
+    symbol: string;
+    color: {
+      hex: string;
+    };
+  };
+};
 
 type Community = {
   id: string;
@@ -18,20 +40,19 @@ export interface StatsDTO {
   communities: Community[];
 }
 
-function mapStatsToDTO(stats: Stats): StatsDTO {
+function mapStatsToDTO(stats: StatsQueryResponse): StatsDTO {
   return {
-    year: stats.year || new Date().getFullYear(),
-    peopleAttended: stats.totalPeople || 0,
-    womenAttended: stats.womenAttended || 0,
-    menAttended: stats.menAttended || 0,
-    communities:
-      stats.communitiesAttended?.map((community) => ({
-        id: community._key,
-        name: community.name || "",
-        color: community.color?.hex || "",
-      })) || [],
-    separator: stats.separator?.symbol || "✦",
-    separatorColor: stats.separator?.color?.hex || "#FDE000",
+    year: stats.year,
+    peopleAttended: stats.totalPeople,
+    womenAttended: stats.womenAttended,
+    menAttended: stats.menAttended,
+    communities: stats.communitiesAttended.map((community) => ({
+      id: community._key,
+      name: community.name,
+      color: community.color.hex,
+    })),
+    separator: stats.separator.symbol,
+    separatorColor: stats.separator.color.hex,
   };
 }
 
@@ -44,7 +65,7 @@ class StatsDAL {
         query: STATS_DATA,
       });
 
-      return mapStatsToDTO(stats.data);
+      return mapStatsToDTO(stats.data as StatsQueryResponse);
     } catch (error) {
       console.error("Error fetching stats data:", error);
       return {

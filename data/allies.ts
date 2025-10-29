@@ -1,6 +1,21 @@
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
-import { Allies } from "@/sanity.types";
+
+// Tipos específicos para la respuesta de la query
+type AlliesQueryLogo = {
+  _key: string;
+  nombre: string;
+  image: {
+    asset: {
+      url: string;
+    };
+  };
+};
+
+type AlliesQueryResponse = {
+  year: number;
+  logos: AlliesQueryLogo[];
+};
 
 export interface LastAllieDTO {
   name: string;
@@ -15,24 +30,20 @@ export interface AllieDTO {
   year: number;
 }
 
-function mapLastAllieToDTO(allie: Allies): LastAllieDTO[] {
-  if (!allie.logos) return [];
-
+function mapLastAllieToDTO(allie: AlliesQueryResponse): LastAllieDTO[] {
   return allie.logos.map((logo) => ({
-    name: logo.nombre || "",
-    img: logo.image?.asset?.url || "",
+    name: logo.nombre,
+    img: logo.image.asset.url,
     href: "#",
   }));
 }
 
-function mapAlliesToDTO(allies: Allies): AllieDTO[] {
-  if (!allies.logos) return [];
-
+function mapAlliesToDTO(allies: AlliesQueryResponse): AllieDTO[] {
   return allies.logos.map((logo) => ({
-    id: logo._key || "",
-    name: logo.nombre || "",
-    img: logo.image?.asset?.url || "",
-    year: allies.year || 0,
+    id: logo._key,
+    name: logo.nombre,
+    img: logo.image.asset.url,
+    year: allies.year,
   }));
 }
 
@@ -56,7 +67,9 @@ class AllieDAL {
         query: QUERY_ALL_ALLIES,
       });
 
-      return allies.data.flatMap(mapAlliesToDTO);
+      return allies.data.flatMap((ally) =>
+        mapAlliesToDTO(ally as AlliesQueryResponse),
+      );
     } catch (error) {
       console.error("Error fetching allies data:", error);
       return [];
@@ -83,7 +96,7 @@ class AllieDAL {
         query: QUERY_LAST_ALLIE,
       });
 
-      return mapLastAllieToDTO(allies.data);
+      return mapLastAllieToDTO(allies.data as AlliesQueryResponse);
     } catch (error) {
       console.error("Error fetching allies data:", error);
       return [];

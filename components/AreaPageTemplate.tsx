@@ -9,7 +9,6 @@ export default function AreaPageTemplate({
   areaData: InterventionDTO;
 }) {
   const gallery: string[] = areaData.gallery?.map((img) => img.url) || [];
-  console.log(gallery);
   return (
     <>
       <section className="container max-w-full py-12 md:py-16 lg:pb-[7.5rem]">

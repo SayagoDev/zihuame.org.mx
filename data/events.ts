@@ -1,7 +1,50 @@
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
-import { BlockContent, Event } from "@/sanity.types";
+import { BlockContent } from "@/sanity.types";
 import { imageUrl } from "@/lib/imageUrl";
+
+// Tipos específicos para las respuestas de las queries
+type EventCarouselQueryResponse = {
+  _id: string;
+  slug: {
+    current: string;
+  };
+  image: {
+    asset: {
+      _ref: string;
+    };
+  };
+  name: string;
+};
+
+type EventFullQueryResponse = {
+  _id: string;
+  name: string;
+  slug: {
+    current: string;
+  };
+  image: {
+    asset: {
+      _ref: string;
+    };
+  };
+  description: BlockContent;
+  buttonText: string;
+  buttonUrl: string;
+  sponsors?: Array<{
+    asset: {
+      _ref: string;
+    };
+  }>;
+};
+
+type EventNavQueryResponse = {
+  _id: string;
+  slug: {
+    current: string;
+  };
+  name: string;
+};
 
 export interface EventDTO {
   id: string;
@@ -21,30 +64,45 @@ export interface EventCarouselDTO {
   imageUrl: string;
 }
 
-function mapEventCarouselToDTO(event: Event): EventCarouselDTO {
+function mapEventCarouselToDTO(
+  event: EventCarouselQueryResponse,
+): EventCarouselDTO {
   return {
     id: event._id,
-    title: event.name || "",
-    slug: event.slug?.current || "",
+    title: event.name,
+    slug: event.slug.current,
     imageUrl: event.image?.asset?._ref ? imageUrl(event.image.asset).url() : "",
   };
 }
 
-function mapEventToDTO(event: Event): EventDTO {
+function mapEventToDTO(event: EventFullQueryResponse): EventDTO {
   return {
     id: event._id,
-    title: event.name || "",
-    slug: event.slug?.current || "",
+    title: event.name,
+    slug: event.slug.current,
     imageUrl: event.image?.asset?._ref ? imageUrl(event.image.asset).url() : "",
-    description: event.description || [],
-    buttonLabel: event.buttonText || "",
-    buttonUrl: event.buttonUrl || "",
+    description: event.description,
+    buttonLabel: event.buttonText,
+    buttonUrl: event.buttonUrl,
     sponsors:
       event.sponsors
         ?.map((sponsor) =>
           sponsor.asset?._ref ? imageUrl(sponsor.asset).url() : "",
         )
         .filter((url) => url !== "") || [],
+  };
+}
+
+function mapEventNavToDTO(event: EventNavQueryResponse): EventDTO {
+  return {
+    id: event._id,
+    title: event.name,
+    slug: event.slug.current,
+    imageUrl: "",
+    description: [],
+    buttonLabel: "",
+    buttonUrl: "",
+    sponsors: [],
   };
 }
 
@@ -59,7 +117,9 @@ class EventDAL {
         query: ALL_EVENTS_QUERY,
       });
 
-      return events.data.map(mapEventToDTO);
+      return events.data.map((event) =>
+        mapEventToDTO(event as EventFullQueryResponse),
+      );
     } catch (error) {
       console.error("Error fetching events data:", error);
       return [];
@@ -76,7 +136,9 @@ class EventDAL {
         query: EVENT_CAROUSEL_QUERY,
       });
 
-      return events.data.map(mapEventCarouselToDTO);
+      return events.data.map((event) =>
+        mapEventCarouselToDTO(event as EventCarouselQueryResponse),
+      );
     } catch (error) {
       console.error("Error fetching event carousel data:", error);
       return [];
@@ -94,7 +156,9 @@ class EventDAL {
         params: { slug },
       });
 
-      return event.data ? mapEventToDTO(event.data) : null;
+      return event.data
+        ? mapEventToDTO(event.data as EventFullQueryResponse)
+        : null;
     } catch (error) {
       console.error("Error fetching event by slug:", error);
       return null;
@@ -111,7 +175,9 @@ class EventDAL {
         query: EVENTS_FOR_NAV_QUERY,
       });
 
-      return events.data.map(mapEventToDTO);
+      return events.data.map((event) =>
+        mapEventNavToDTO(event as EventNavQueryResponse),
+      );
     } catch (error) {
       console.error("Error fetching events for navigation:", error);
       return [];

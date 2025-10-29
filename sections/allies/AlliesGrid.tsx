@@ -27,7 +27,6 @@ export default function AlliesSection({
   const filteredAllies = alliesData.filter(
     (ally) => ally.year === selectedYear,
   );
-  console.log(filteredAllies);
 
   const isEmpty = filteredAllies.length === 0;
   const isOne = filteredAllies.length === 1;
