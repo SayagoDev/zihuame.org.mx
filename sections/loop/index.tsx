@@ -32,7 +32,7 @@ export default async function Loop({ className }: { className?: string }) {
           {communities.map((culture, index) => (
             <>
               <span
-                key={index}
+                key={culture.id}
                 className={cn(
                   `inline-flex items-center`,
                   index === 0 && "ml-4",

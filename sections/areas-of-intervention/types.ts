@@ -7,8 +7,6 @@ export interface AreaOfIntervention {
   href: string;
   hrefDonate: string;
   totalPeople: number;
-  communities: string[];
-  gallery: string[];
   description: string;
   className: string;
 }

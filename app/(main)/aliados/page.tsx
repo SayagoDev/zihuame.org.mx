@@ -1,11 +1,13 @@
+import { AllieService } from "@/data/allies";
 import AlliesGrid from "@/sections/allies/AlliesGrid";
 import Footer from "@/sections/footer";
 
 export default function AlliesPage() {
+  const allies = new AllieService().getAllAllies();
   return (
     <>
       <main className="min-h-screen">
-        <AlliesGrid />
+        <AlliesGrid allies={allies} />
       </main>
       <Footer />
     </>

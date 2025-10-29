@@ -1,12 +1,14 @@
 interface ButtonProps {
   children: React.ReactNode;
   href: string;
+  target?: string;
 }
 
-export default function Button({ children, href }: ButtonProps) {
+export default function Button({ children, href, target }: ButtonProps) {
   return (
     <a
       href={href}
+      target={target}
       className="btn btn-outline text-xl xl:text-2xl 3xl:text-3xl hover:bg-success uppercase font-bold gap-2 py-5 xl:py-6 3xl:py-7 w-full"
     >
       {children}
@@ -20,9 +22,9 @@ export default function Button({ children, href }: ButtonProps) {
         <path
           d="M10.875 1.5H4.625C3.7962 1.5 3.00134 1.82924 2.41529 2.41529C1.82924 3.00134 1.5 3.7962 1.5 4.625V23.375C1.5 24.2038 1.82924 24.9987 2.41529 25.5847C3.00134 26.1708 3.7962 26.5 4.625 26.5H23.375C24.2038 26.5 24.9987 26.1708 25.5847 25.5847C26.1708 24.9987 26.5 24.2038 26.5 23.375V17.125M14 14L26.5 1.5M26.5 1.5V9.3125M26.5 1.5H18.6875"
           stroke="#040504"
-          stroke-width="3"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </a>

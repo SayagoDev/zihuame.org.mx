@@ -13,6 +13,120 @@
  */
 
 // Source: schema.json
+export type Allies = {
+  _id: string;
+  _type: "allies";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  year?: number;
+  logos?: Array<{
+    nombre?: string;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    _key: string;
+  }>;
+};
+
+export type Report = {
+  _id: string;
+  _type: "report";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  image?: {
+    img?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    shadow?: Color;
+  };
+  title?: string;
+  pdf?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+    };
+    media?: unknown;
+    _type: "file";
+  };
+};
+
+export type Community = {
+  _id: string;
+  _type: "community";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  color?: Color;
+};
+
+export type Intervention = {
+  _id: string;
+  _type: "intervention";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  description?: string;
+  peopleAttendance?: number;
+  buttonText?: string;
+  communitiesAttended?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "community";
+  }>;
+  gallery?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+};
+
 export type Event = {
   _id: string;
   _type: "event";
@@ -302,8 +416,37 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = Event | BlockContent | Intro | Stats | Color | RgbaColor | HsvaColor | HslaColor | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = Allies | Report | Community | Intervention | Event | BlockContent | Intro | Stats | Color | RgbaColor | HsvaColor | HslaColor | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./data/allies.ts
+// Variable: QUERY_ALL_ALLIES
+// Query: *[_type == "allies"]{          year,          logos[]{            _key, nombre,            image{              asset->{                url              }            }          },      }
+export type QUERY_ALL_ALLIESResult = Array<{
+  year: number | null;
+  logos: Array<{
+    _key: string;
+    nombre: string | null;
+    image: {
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
+  }> | null;
+}>;
+// Variable: QUERY_LAST_ALLIE
+// Query: *[_type == "allies"]{          logos[]{            _key, nombre,            image{              asset->{                url              }            }          },      } | order(year desc)[0]
+export type QUERY_LAST_ALLIEResult = {
+  logos: Array<{
+    _key: string;
+    nombre: string | null;
+    image: {
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
+  }> | null;
+} | null;
+
 // Source: ./data/events.ts
 // Variable: ALL_EVENTS_QUERY
 // Query: *[_type == "event"] | order(name asc)
@@ -393,6 +536,129 @@ export type EVENT_CAROUSEL_QUERYResult = Array<{
   } | null;
   name: string | null;
 }>;
+// Variable: EVENT_BY_SLUG_QUERY
+// Query: *[_type == "event" && slug.current == $slug][0]
+export type EVENT_BY_SLUG_QUERYResult = {
+  _id: string;
+  _type: "event";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }>;
+  buttonText?: string;
+  buttonUrl?: string;
+  sponsors?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+} | null;
+// Variable: EVENTS_FOR_NAV_QUERY
+// Query: *[_type == "event"]{_id,slug,name} | order(name asc)
+export type EVENTS_FOR_NAV_QUERYResult = Array<{
+  _id: string;
+  slug: Slug | null;
+  name: string | null;
+}>;
+
+// Source: ./data/intervention.ts
+// Variable: ALL_INTERVENTIONS_QUERY
+// Query: *[_type == "intervention" && slug.current == $slug]{      ...,        communitiesAttended[]->{          name,          color{hex}        }      } | order(name asc)[0]
+export type ALL_INTERVENTIONS_QUERYResult = {
+  _id: string;
+  _type: "intervention";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  description?: string;
+  peopleAttendance?: number;
+  buttonText?: string;
+  communitiesAttended: Array<{
+    name: string | null;
+    color: {
+      hex: string | null;
+    } | null;
+  }> | null;
+  gallery?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+} | null;
 
 // Source: ./data/intro.ts
 // Variable: INTRO_DATA
@@ -413,6 +679,29 @@ export type INTRO_DATAResult = {
     url?: string;
   };
 } | null;
+
+// Source: ./data/reports.ts
+// Variable: ALL_REPORTS_QUERY
+// Query: *[_type == "report"]{        _id, title,            pdf{              asset->{                url              }            },            image{              img{                asset->{                  url                }              },              shadow{                hex              }            }      } | order(title desc)
+export type ALL_REPORTS_QUERYResult = Array<{
+  _id: string;
+  title: string | null;
+  pdf: {
+    asset: {
+      url: string | null;
+    } | null;
+  } | null;
+  image: {
+    img: {
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
+    shadow: {
+      hex: string | null;
+    } | null;
+  } | null;
+}>;
 
 // Source: ./data/stats.ts
 // Variable: STATS_DATA
@@ -442,9 +731,15 @@ export type STATS_DATAResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
+    "*[_type == \"allies\"]{\n          year,\n          logos[]{\n            _key, nombre,\n            image{\n              asset->{\n                url\n              }\n            }\n          },\n      }": QUERY_ALL_ALLIESResult;
+    "\n      *[_type == \"allies\"]{\n          logos[]{\n            _key, nombre,\n            image{\n              asset->{\n                url\n              }\n            }\n          },\n      } | order(year desc)[0]\n      ": QUERY_LAST_ALLIEResult;
     "*[_type == \"event\"] | order(name asc)": ALL_EVENTS_QUERYResult;
     "*[_type == \"event\"]{_id,slug,image,name} | order(name asc)": EVENT_CAROUSEL_QUERYResult;
+    "*[_type == \"event\" && slug.current == $slug][0]": EVENT_BY_SLUG_QUERYResult;
+    "*[_type == \"event\"]{_id,slug,name} | order(name asc)": EVENTS_FOR_NAV_QUERYResult;
+    "*[_type == \"intervention\" && slug.current == $slug]{\n      ...,\n        communitiesAttended[]->{\n          name,\n          color{hex}\n        }\n      } | order(name asc)[0]": ALL_INTERVENTIONS_QUERYResult;
     "*[_type == \"intro\"] | order(name asc)[0]": INTRO_DATAResult;
+    "*[_type == \"report\"]{\n        _id, title,\n            pdf{\n              asset->{\n                url\n              }\n            },\n            image{\n              img{\n                asset->{\n                  url\n                }\n              },\n              shadow{\n                hex\n              }\n            }\n      } | order(title desc)": ALL_REPORTS_QUERYResult;
     "*[_type == \"stats\"] | order(name asc)[0]": STATS_DATAResult;
   }
 }

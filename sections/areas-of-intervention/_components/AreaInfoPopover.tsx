@@ -16,9 +16,9 @@ export default function AreaInfoPopover({
       <div className="relative bg-base-200 rounded-lg p-4 xl:p-6 shadow-sm">
         {/* Triángulo apuntando hacia arriba */}
         <div
-          className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-0 h-0 
-                     border-l-[16px] border-l-transparent 
-                     border-r-[16px] border-r-transparent 
+          className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-0 h-0
+                     border-l-[16px] border-l-transparent
+                     border-r-[16px] border-r-transparent
                      border-b-[16px] border-b-[var(--color-base-200)]"
           aria-hidden="true"
         />
@@ -44,9 +44,9 @@ export default function AreaInfoPopover({
                 <path
                   d="M1.25 1.25H11.25M11.25 1.25V11.25M11.25 1.25L1.25 11.25"
                   stroke="#FC6900"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </span>

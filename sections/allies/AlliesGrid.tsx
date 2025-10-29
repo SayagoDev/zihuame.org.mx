@@ -1,95 +1,33 @@
 "use client";
 
 import Heading from "@/components/Heading";
-import { useState } from "react";
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { AllieDTO } from "@/data/allies";
+import Image from "next/image";
+import { use, useState } from "react";
 
-interface Ally {
-  id: string;
-  name: string;
-  logo: string;
-  year: number;
-}
+export default function AlliesSection({
+  allies,
+}: {
+  allies: Promise<AllieDTO[]>;
+}) {
+  const alliesData = use(allies);
 
-// Datos de ejemplo - puedes reemplazar con tus datos reales
-const alliesData: Ally[] = [
-  {
-    id: "1",
-    name: "Dibujando un Mañana",
-    logo: "/images/allies/aliado_1.png",
-    year: 2024,
-  },
-  {
-    id: "2",
-    name: "HEB en la Comunidad",
-    logo: "/images/allies/aliado_2.png",
-    year: 2024,
-  },
-  {
-    id: "3",
-    name: "NL Igualdad e Inclusión",
-    logo: "/images/allies/aliado_3.png",
-    year: 2024,
-  },
-  {
-    id: "4",
-    name: "Fundación Prisa",
-    logo: "/images/allies/aliado_4.png",
-    year: 2024,
-  },
-  {
-    id: "5",
-    name: "Treviño Elizondo",
-    logo: "/images/allies/aliado_5.png",
-    year: 2024,
-  },
-  {
-    id: "6",
-    name: "Fundación Montemayor",
-    logo: "/images/allies/aliado_6.png",
-    year: 2024,
-  },
-  {
-    id: "7",
-    name: "Nacional Monte de Piedad",
-    logo: "/images/allies/aliado_7.png",
-    year: 2024,
-  },
-  {
-    id: "8",
-    name: "The Home Depot",
-    logo: "/images/allies/aliado_8.png",
-    year: 2024,
-  },
-  // Ejemplos para otros años
-  {
-    id: "12",
-    name: "Aliado 2023 A",
-    logo: "/images/allies/aliado_8.png",
-    year: 2023,
-  },
-  {
-    id: "13",
-    name: "Aliado 2023 B",
-    logo: "/images/allies/aliado_7.png",
-    year: 2023,
-  },
-  {
-    id: "14",
-    name: "Aliado 2022 A",
-    logo: "/images/allies/aliado_6.png",
-    year: 2022,
-  },
-];
+  const availableYears = [
+    ...new Set(
+      alliesData.map((ally) => {
+        return ally.year;
+      }),
+    ),
+  ].sort((a, b) => b - a);
 
-const availableYears = [2024, 2023, 2022, 2021, 2020];
-
-export default function AlliesSection() {
-  const [selectedYear, setSelectedYear] = useState<number>(2024);
+  const [selectedYear, setSelectedYear] = useState<number>(
+    new Date().getFullYear() - 1,
+  );
 
   const filteredAllies = alliesData.filter(
-    (ally) => ally.year === selectedYear
+    (ally) => ally.year === selectedYear,
   );
+  console.log(filteredAllies);
 
   const isEmpty = filteredAllies.length === 0;
   const isOne = filteredAllies.length === 1;
@@ -156,9 +94,11 @@ export default function AlliesSection() {
               className={`border-b sm:border-r border-foreground/20 p-8 flex items-center justify-center bg-background min-h-[250px] transition-colors duration-300 hover:bg-base-300/30 group ${isOne ? "border-t-1" : ""}`}
             >
               <div className="w-full h-full flex items-center justify-center">
-                <img
-                  src={ally.logo || "/placeholder.svg"}
+                <Image
+                  src={ally.img || "/placeholder.svg"}
                   alt={ally.name}
+                  width={250}
+                  height={150}
                   className="max-w-[250px] max-h-[150px] w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-105"
                 />
               </div>

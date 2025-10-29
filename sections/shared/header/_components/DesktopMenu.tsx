@@ -149,7 +149,10 @@ export default function DesktopMenu({ events }: { events: EventDTO[] }) {
       aria-label="Navegación principal"
       id="desktop-menu"
     >
-      <ul className="menu menu-horizontal py-0 text-2xl" role="menubar">
+      <ul
+        className="menu menu-horizontal py-0 w-fit text-2xl"
+        role="menubar w-fit"
+      >
         <li role="none">
           <details className="relative z-50">
             <summary
@@ -221,7 +224,7 @@ export default function DesktopMenu({ events }: { events: EventDTO[] }) {
               Intervención
             </summary>
             <ul
-              className="bg-base-200 rounded-box p-2 shadow-lg z-50"
+              className="bg-base-200 rounded-box p-2 shadow-lg z-50 w-fit"
               role="menu"
               aria-label="Servicios"
             >
@@ -230,15 +233,29 @@ export default function DesktopMenu({ events }: { events: EventDTO[] }) {
                   <summary role="menuitem" aria-haspopup="true">
                     Eventos
                   </summary>
-                  <ul role="menu" aria-label="Eventos">
-                    {events.map((event) => (
-                      <li role="none" key={event.id}>
-                        <a href={`/eventos/${event.slug}`} role="menuitem">
-                          <span className="truncate">{event.title}</span>
+                  {events.length > 0 ? (
+                    <ul role="menu" aria-label="Eventos">
+                      {events.map((event) => (
+                        <li role="none" key={event.id}>
+                          <a
+                            href={`/eventos/${event.slug}`}
+                            role="menuitem"
+                            className="truncate"
+                          >
+                            <span>{event.title}</span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <ul role="menu" aria-label="Eventos">
+                      <li role="none">
+                        <a href="#" role="menuitem" className="truncate">
+                          No hay eventos disponibles
                         </a>
                       </li>
-                    ))}
-                  </ul>
+                    </ul>
+                  )}
                 </details>
               </li>
               <li role="none">
@@ -247,13 +264,43 @@ export default function DesktopMenu({ events }: { events: EventDTO[] }) {
                 </a>
               </li>
               <li role="none">
-                <a href="#" className="" role="menuitem" tabIndex={-1}>
-                  Capacitación
+                <a
+                  href="/desarrollo-comunitario"
+                  onClick={closeMenu}
+                  role="menuitem"
+                  className="truncate"
+                >
+                  Desarrollo Comunitario
                 </a>
               </li>
               <li role="none">
-                <a href="#" className="" role="menuitem" tabIndex={-1}>
-                  Desarrollo
+                <a
+                  href="/empoderamiento-economico"
+                  onClick={closeMenu}
+                  role="menuitem"
+                  className="truncate"
+                >
+                  Empoderamiento Económico
+                </a>
+              </li>
+              <li role="none">
+                <a
+                  href="/derechos-humanos"
+                  onClick={closeMenu}
+                  role="menuitem"
+                  className="truncate"
+                >
+                  Derechos Humanos
+                </a>
+              </li>
+              <li role="none">
+                <a
+                  href="/salud"
+                  onClick={closeMenu}
+                  role="menuitem"
+                  className="truncate"
+                >
+                  Salud
                 </a>
               </li>
             </ul>

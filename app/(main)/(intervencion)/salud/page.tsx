@@ -1,18 +1,16 @@
-import { AREAS_DATA } from "@/sections/areas-of-intervention/constants";
 import AreaPageTemplate from "@/components/AreaPageTemplate";
+import { InterventionService } from "@/data/intervention";
 import Footer from "@/sections/footer";
 
-export default function SaludPage() {
-  const area = AREAS_DATA.find((area) => area.id === "salud");
-
-  if (!area) {
-    return <div>Área no encontrada</div>;
-  }
+export default async function SaludPage() {
+  const areaData = await new InterventionService().getInterventionBySlug(
+    "salud",
+  );
 
   return (
     <>
       <main>
-        <AreaPageTemplate area={area} />
+        <AreaPageTemplate areaData={areaData} />
       </main>
       <Footer />
     </>

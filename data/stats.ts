@@ -8,7 +8,7 @@ type Community = {
   color: string;
 };
 
-interface StatsDTO {
+export interface StatsDTO {
   year: number;
   peopleAttended: number;
   womenAttended: number;

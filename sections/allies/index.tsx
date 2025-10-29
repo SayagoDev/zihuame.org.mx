@@ -1,5 +1,6 @@
 import Heading from "@/components/Heading";
 import LogoLoop from "@/components/LogoLoop";
+import { AllieService } from "@/data/allies";
 
 const allies = [
   {
@@ -44,7 +45,15 @@ const allies = [
   },
 ];
 
-export default function Allies() {
+export default async function Allies() {
+  const alliesData = await new AllieService().getLastAllie();
+
+  const allies = alliesData.map((allie) => ({
+    alt: allie.name,
+    src: allie.img,
+    href: allie.href,
+  }));
+
   return (
     <section className="py-12" id="allies">
       <Heading className="">Nuestros Aliados y Aliadas</Heading>

@@ -61,7 +61,10 @@ export default function Footer() {
             <h6 className="font-medium">Programas</h6>
             <ul className="space-y-1">
               <li>
-                <a href="#" className="link link-hover block truncate">
+                <a
+                  href="/desarrollo-comunitario"
+                  className="link link-hover block truncate"
+                >
                   Desarrollo Comunitario
                 </a>
               </li>
@@ -71,13 +74,24 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="link link-hover block truncate">
+                <a href="/salud" className="link link-hover block truncate">
                   Salud
                 </a>
               </li>
               <li>
-                <a href="#" className="link link-hover block truncate">
+                <a
+                  href="/empoderamiento-economico"
+                  className="link link-hover block truncate"
+                >
                   Empoderamiento Económico
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/derechos-humanos"
+                  className="link link-hover block truncate"
+                >
+                  Derechos Humanos
                 </a>
               </li>
             </ul>

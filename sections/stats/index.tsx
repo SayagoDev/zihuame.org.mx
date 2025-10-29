@@ -1,30 +1,38 @@
 "use client";
 import { DataCount } from "./_components/DataCount";
 import Break from "@/components/Break";
-import { useEffect, useRef } from "react";
+import { use, useEffect, useRef } from "react";
 import { useConfettiOnIntersection } from "@/lib/confetti";
+import { StatsDTO } from "@/data/stats";
 
-export default function Stats({
-  year,
-  peopleAttended,
-  womenAttended,
-  menAttended,
-}: {
-  year: number;
-  peopleAttended: number;
-  womenAttended: number;
-  menAttended: number;
-}) {
+export default function Stats({ data }: { data: Promise<StatsDTO> }) {
+  const { year, peopleAttended, womenAttended, menAttended } = use(data);
+
   const sectionRef = useRef<HTMLElement | null>(null);
-  const { setupObserver } = useConfettiOnIntersection(0.5, {
+  const observerCleanupRef = useRef<(() => void) | null>(null);
+
+  const confettiConfig = useRef({
     count: 200,
     origin: { y: 0.95 },
   });
 
+  const { setupObserver } = useConfettiOnIntersection(
+    0.5,
+    confettiConfig.current,
+  );
+
   useEffect(() => {
-    if (!sectionRef.current) return;
-    return setupObserver(sectionRef.current);
-  }, [setupObserver]);
+    if (!sectionRef.current || observerCleanupRef.current) return;
+
+    observerCleanupRef.current = setupObserver(sectionRef.current);
+
+    return () => {
+      if (observerCleanupRef.current) {
+        observerCleanupRef.current();
+        observerCleanupRef.current = null;
+      }
+    };
+  }, []); // Empty dependency array to run only once
 
   return (
     <>

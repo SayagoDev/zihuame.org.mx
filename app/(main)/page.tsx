@@ -10,19 +10,13 @@ import Allies from "@/sections/allies";
 import Footer from "@/sections/footer";
 import { StatsService } from "@/data/stats";
 
-export default async function HomePage() {
-  const { year, peopleAttended, womenAttended, menAttended } =
-    await new StatsService().getStatsData();
+export default function HomePage() {
+  const statsData = new StatsService().getStatsData();
   return (
     <>
       <Home />
       <Intro />
-      <Stats
-        year={year}
-        peopleAttended={peopleAttended}
-        womenAttended={womenAttended}
-        menAttended={menAttended}
-      />
+      <Stats data={statsData} />
       <Loop />
       <Carousel />
       <Banner />

@@ -17,11 +17,11 @@ export default function Pillars() {
             <h1 className="mb-6 text-balance text-3xl font-bold md:text-4xl lg:text-5xl xl:text-5xl">
               Somos una Fuerza de Cambio
             </h1>
-            <p className="mx-auto text-lg max-w-3xl text-pretty leading-relaxed md:text-xl">
-              Zihuame Mochilla es una organización que nace para impulsar el
-              desarrollo social y cultural de los pueblos originarios. A través
-              de estos pilares, buscamos eliminar la marginación y construir un
-              futuro con dignidad.
+            <p className="mx-auto text-lg max-w-4xl text-pretty leading-relaxed md:text-xl">
+              Somos una organización que nace para impulsar el desarrollo social
+              y cultural de los pueblos originarios. A través de estos pilares,
+              buscamos eliminar la marginación y construir un futuro con
+              dignidad.
             </p>
           </div>
 
@@ -37,10 +37,10 @@ export default function Pillars() {
                   />
                 </div>
               </div>
-              <h3 className="mb-4 text-xl font-medium text-foreground md:text-2xl">
+              <h3 className="mb-4 text-xl font-medium text-foreground md:text-2xl text-center">
                 Fomento Comunitario
               </h3>
-              <p className="text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
+              <p className="text-pretty text-base leading-relaxed text-muted-foreground md:text-lg text-center">
                 Impulsamos la acción colectiva y la organización desde las
                 bases, permitiendo que las propias comunidades identifiquen sus
                 necesidades y lideren proyectos de cambio real y sostenible.
@@ -57,10 +57,10 @@ export default function Pillars() {
                   />
                 </div>
               </div>
-              <h3 className="mb-4 text-xl font-medium text-foreground md:text-2xl">
+              <h3 className="mb-4 text-xl font-medium text-foreground md:text-2xl text-center">
                 Identidad y Cultura
               </h3>
-              <p className="text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
+              <p className="text-pretty text-base leading-relaxed text-muted-foreground md:text-lg text-center">
                 Fomentamos el respeto por las tradiciones con programas
                 educativos que fortalecen la identidad, permitiendo que las
                 comunidades transmitan su valioso legado a las nuevas
@@ -78,10 +78,10 @@ export default function Pillars() {
                   />
                 </div>
               </div>
-              <h3 className="mb-4 text-xl font-medium text-foreground md:text-2xl">
+              <h3 className="mb-4 text-xl font-medium text-foreground md:text-2xl text-center">
                 Derechos e Igualdad
               </h3>
-              <p className="text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
+              <p className="text-pretty text-base leading-relaxed text-muted-foreground md:text-lg text-center">
                 Promovemos la igualdad de oportunidades y el respeto a los
                 derechos humanos de todas las personas, trabajando para
                 erradicar la discriminación y construir una sociedad justa.
@@ -98,10 +98,10 @@ export default function Pillars() {
                   />
                 </div>
               </div>
-              <h3 className="mb-4 text-xl font-medium text-foreground md:text-2xl">
+              <h3 className="mb-4 text-xl font-medium text-foreground md:text-2xl text-center">
                 Autonomía y Desarrollo
               </h3>
-              <p className="text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
+              <p className="text-pretty text-base leading-relaxed text-muted-foreground md:text-lg text-center">
                 Facilitamos la autonomía y el desarrollo pleno con herramientas
                 de gestión para las propias comunidades, permitiendo que las
                 personas mejoren su calidad de vida de manera real y sostenible.

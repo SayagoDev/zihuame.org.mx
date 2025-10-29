@@ -2,21 +2,26 @@ import Heading from "@/components/Heading";
 import Image from "next/image";
 import Button from "./_components/Button";
 import { Arrows } from "./_components/Arrows";
+import { ReportService } from "@/data/reports";
 
-export default function AnnualReports() {
+export default async function AnnualReports() {
+  const reports = await new ReportService().getAllReports();
   return (
     <section id="informes" className="container max-w-full py-12 md:py-16 ">
       <Heading>Informe Anual</Heading>
-      <div className=" md:max-w-[34rem] lg:max-w-[40rem] xl:max-w-[60rem] 3xl:max-w-[85rem] flex flex-col items-center md:justify-between gap-4 md:flex-row mt-8 sm:mt-14 lg:mt-[4.5rem] xl:mt-[8rem] mx-auto">
+      <div className="md:max-w-136 lg:max-w-160 xl:max-w-240 3xl:max-w-340 flex flex-col items-center md:justify-between gap-4 md:flex-row mt-8 sm:mt-14 lg:mt-18 xl:mt-32 mx-auto">
         <div className="relative">
           <Arrows />
           <a href="#">
             <Image
-              src="/images/reports/informe_2024.png"
+              src={reports[0].imgUrl as string}
               alt="Informe Anual 2024"
               width={440}
               height={572}
-              className="w-65 md:w-70 xl:w-90 3xl:w-full drop-shadow-lg drop-shadow-success hover:scale-102 transition-all duration-300"
+              className="w-65 md:w-70 xl:w-90 3xl:w-100 hover:scale-102 transition-all duration-300"
+              style={{
+                filter: `drop-shadow(${reports[reports.length - 1].shadowColor} 0 0 0.7rem)`,
+              }}
             />
           </a>
         </div>
@@ -25,21 +30,13 @@ export default function AnnualReports() {
             Informes Anteriores:
           </h3>
           <div className="grid xl:grid-cols-2 gap-2 overflow-y-auto max-h-[19.5rem] informes-container">
-            <Button href="#">Informe 2023</Button>
-            <Button href="#">Informe 2022</Button>
-            <Button href="#">Informe 2021</Button>
-            <Button href="#">Informe 2020</Button>
-            <Button href="#">Informe 2018</Button>
-            <Button href="#">Informe 2017</Button>
-            <Button href="#">Informe 2016</Button>
-            <Button href="#">Informe 2015</Button>
-            <Button href="#">Informe 2014</Button>
-            <Button href="#">Informe 2013</Button>
-            <Button href="#">Informe 2012</Button>
-            <Button href="#">Informe 2011</Button>
-            <Button href="#">Informe 2010</Button>
+            {reports.map((report) => (
+              <Button key={report.id} href={report.pdfUrl} target="_blank">
+                {report.title}
+              </Button>
+            ))}
           </div>
-          <img
+          <Image
             src="/images/down_arrow.svg"
             alt="Flecha hacia abajo"
             width={25}

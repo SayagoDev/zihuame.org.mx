@@ -3,6 +3,8 @@
  * Utiliza canvas-confetti para crear efectos visuales
  */
 
+import { useRef } from "react";
+
 export interface ConfettiOptions {
   particleCount?: number;
   spread?: number;
@@ -28,7 +30,7 @@ export interface ConfettiConfig {
  */
 export async function fireConfetti(
   particleRatio: number,
-  options: ConfettiOptions = {}
+  options: ConfettiOptions = {},
 ): Promise<void> {
   // Importación dinámica para evitar SSR y cargar solo en cliente
   const { default: confetti } = (await import("canvas-confetti")) as {
@@ -50,7 +52,7 @@ export async function fireConfetti(
  * Función para crear un efecto de confetti completo con múltiples disparos
  */
 export async function createConfettiEffect(
-  config: ConfettiConfig = {}
+  config: ConfettiConfig = {},
 ): Promise<void> {
   const { count = 200, origin = { y: 0.95 } } = config;
 
@@ -116,9 +118,9 @@ export async function createConfettiEffect(
  */
 export function useConfettiOnIntersection(
   threshold: number = 0.5,
-  config: ConfettiConfig = {}
+  config: ConfettiConfig = {},
 ) {
-  const hasFiredRef = { current: false };
+  const hasFiredRef = useRef(false);
 
   const setupObserver = (element: HTMLElement) => {
     const observer = new IntersectionObserver(
@@ -129,7 +131,7 @@ export function useConfettiOnIntersection(
 
         await createConfettiEffect(config);
       },
-      { threshold }
+      { threshold },
     );
 
     observer.observe(element);

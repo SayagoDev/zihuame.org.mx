@@ -36,7 +36,7 @@ export default function MobileMenu({ events }: { events: EventDTO[] }) {
       <ul
         id="mobile-menu"
         tabIndex={0}
-        className="mt-2 bg-base-200 dropdown-content menu rounded-box z-1 w-52 p-2 shadow [&>*]:text-xl md:[&>*]:text-2xl"
+        className="mt-2 bg-base-200 dropdown-content menu rounded-box z-1 w-fit max-w-70 md:max-w-lvw p-2 shadow [&>*]:text-xl md:[&>*]:text-2xl"
         role="menu"
         aria-label="Menú principal"
       >
@@ -93,15 +93,35 @@ export default function MobileMenu({ events }: { events: EventDTO[] }) {
                   <summary role="menuitem" aria-haspopup="true">
                     Eventos
                   </summary>
-                  <ul role="menu" aria-label="Eventos">
-                    {events.map((event) => (
-                      <li role="none" key={event.id}>
-                        <a href={`/eventos/${event.slug}`} role="menuitem">
-                          <span className="truncate">{event.title}</span>
+                  {events.length > 0 ? (
+                    <ul role="menu" aria-label="Eventos">
+                      {events.map((event) => (
+                        <li role="none" key={event.id}>
+                          <a
+                            href={`/eventos/${event.slug}`}
+                            className="truncate"
+                            role="menuitem"
+                          >
+                            <span>{event.title}</span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <ul role="menu" aria-label="Eventos">
+                      <li role="none">
+                        <a
+                          href="#"
+                          role="menuitem"
+                          className="truncate w-50 md:w-70"
+                        >
+                          <span className="truncate">
+                            No hay eventos disponibles
+                          </span>
                         </a>
                       </li>
-                    ))}
-                  </ul>
+                    </ul>
+                  )}
                 </details>
               </li>
               <li role="none">
@@ -110,13 +130,31 @@ export default function MobileMenu({ events }: { events: EventDTO[] }) {
                 </a>
               </li>
               <li role="none">
-                <a href="#" onClick={closeMenu} role="menuitem">
-                  Capacitación
+                <a
+                  href="/desarrollo-comunitario"
+                  onClick={closeMenu}
+                  role="menuitem"
+                >
+                  Desarrollo Comunitario
                 </a>
               </li>
               <li role="none">
-                <a href="#" onClick={closeMenu} role="menuitem">
-                  Desarrollo
+                <a
+                  href="/empoderamiento-económico"
+                  onClick={closeMenu}
+                  role="menuitem"
+                >
+                  Empoderamiento Económico
+                </a>
+              </li>
+              <li role="none">
+                <a href="/derechos-humanos" onClick={closeMenu} role="menuitem">
+                  Derechos Humanos
+                </a>
+              </li>
+              <li role="none">
+                <a href="/salud" onClick={closeMenu} role="menuitem">
+                  Salud
                 </a>
               </li>
             </ul>
