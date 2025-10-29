@@ -1,3 +1,4 @@
+import React from "react";
 import Button from "@/components/Button";
 import SimpleMarquee from "@/components/fancy/blocks/simple-marquee";
 import { StatsService } from "@/data/stats";
@@ -30,9 +31,8 @@ export default async function Loop({ className }: { className?: string }) {
       >
         <div className="flex items-center gap-4 whitespace-nowrap">
           {communities.map((culture, index) => (
-            <>
+            <React.Fragment key={culture.id}>
               <span
-                key={culture.id}
                 className={cn(
                   `inline-flex items-center`,
                   index === 0 && "ml-4",
@@ -47,7 +47,7 @@ export default async function Loop({ className }: { className?: string }) {
               >
                 {separator}
               </span>
-            </>
+            </React.Fragment>
           ))}
         </div>
       </SimpleMarquee>

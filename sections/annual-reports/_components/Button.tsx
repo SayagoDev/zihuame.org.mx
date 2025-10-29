@@ -1,15 +1,26 @@
+import { cn } from "@/lib/utils/cn";
+
 interface ButtonProps {
   children: React.ReactNode;
   href: string;
   target?: string;
+  className?: string;
 }
 
-export default function Button({ children, href, target }: ButtonProps) {
+export default function Button({
+  children,
+  href,
+  target,
+  className,
+}: ButtonProps) {
   return (
     <a
       href={href}
       target={target}
-      className="btn btn-outline text-xl xl:text-2xl 3xl:text-3xl hover:bg-success uppercase font-bold gap-2 py-5 xl:py-6 3xl:py-7 w-full"
+      className={cn(
+        "btn btn-outline text-xl xl:text-2xl 3xl:text-3xl hover:bg-success uppercase font-bold gap-2 py-5 xl:py-6 3xl:py-7 w-full",
+        className,
+      )}
     >
       {children}
       <svg

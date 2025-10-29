@@ -6,13 +6,14 @@ import { ReportService } from "@/data/reports";
 
 export default async function AnnualReports() {
   const reports = await new ReportService().getAllReports();
+  console.log(reports);
   return (
     <section id="informes" className="container max-w-full py-12 md:py-16 ">
       <Heading>Informe Anual</Heading>
       <div className="md:max-w-136 lg:max-w-160 xl:max-w-240 3xl:max-w-340 flex flex-col items-center md:justify-between gap-4 md:flex-row mt-8 sm:mt-14 lg:mt-18 xl:mt-32 mx-auto">
         <div className="relative">
           <Arrows />
-          <a href="#">
+          <a href={reports[0].pdfUrl} target="_blank">
             <Image
               src={reports[0].imgUrl as string}
               alt="Informe Anual 2024"
@@ -20,7 +21,7 @@ export default async function AnnualReports() {
               height={572}
               className="w-65 md:w-70 xl:w-90 3xl:w-100 hover:scale-102 transition-all duration-300"
               style={{
-                filter: `drop-shadow(${reports[reports.length - 1].shadowColor} 0 0 0.7rem)`,
+                filter: `drop-shadow(${reports[0].shadowColor} 0 0 0.7rem)`,
               }}
             />
           </a>
