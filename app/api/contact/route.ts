@@ -3,8 +3,9 @@ import { Resend } from "resend";
 import { z } from "zod";
 
 const resend = new Resend(process.env.RESEND_API_KEY!);
-const EMAIL_TO =
-  process.env.RESEND_CONTACT_TO_EMAIL || process.env.RESEND_CFDI_TO_EMAIL!;
+const EMAIL_TO = (
+  process.env.RESEND_CONTACT_TO_EMAIL || process.env.RESEND_CFDI_TO_EMAIL!
+).split(",");
 const EMAIL_FROM = process.env.RESEND_CONTACT_FROM_EMAIL!;
 
 const ContactSchema = z.object({
@@ -45,7 +46,7 @@ ${message ? `<p><b>Mensaje:</b> ${message}</p>` : ""}`;
 
     const { data, error } = await resend.emails.send({
       from: EMAIL_FROM,
-      to: [EMAIL_TO!],
+      to: EMAIL_TO!,
       subject: "[Contacto] Nuevo mensaje del sitio web",
       html,
     });
