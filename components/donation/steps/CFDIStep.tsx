@@ -7,7 +7,7 @@ import { z } from "zod";
 
 const InvoiceContactSchema = z.object({
   name: z.string().min(2, "El nombre es requerido").max(60),
-  email: z.string().email("Correo inválido"),
+  email: z.email({ error: "Correo inválido" }),
   message: z.string().max(300).optional(),
 });
 

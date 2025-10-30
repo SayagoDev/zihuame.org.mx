@@ -60,6 +60,11 @@ export function AmountStep({ onNext, onBack }: AmountStepProps) {
       return;
     }
 
+    if (amount > 200000) {
+      alert("El monto máximo es $200,000 MXN");
+      return;
+    }
+
     if (!selectedProgramData) {
       console.error("No se encontró información del programa seleccionado");
       alert("Error: No se encontró información del programa seleccionado");
