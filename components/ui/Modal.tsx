@@ -69,7 +69,7 @@ export function Modal({
       >
         {/* Header */}
         <div className="mb-4 flex items-center justify-between">
-          {title && <h3 className="text-lg font-bold">{title}</h3>}
+          {title && <h3 className="text-lg font-komet font-bold">{title}</h3>}
           {showCloseButton && (
             <form method="dialog">
               <button

@@ -1,6 +1,7 @@
 "use client";
 
 import Heading from "@/components/Heading";
+import { useContactModal } from "@/components/providers/ContactProvider";
 import { AllieDTO } from "@/data/allies";
 import Image from "next/image";
 import { use, useState } from "react";
@@ -11,21 +12,21 @@ export default function AlliesSection({
   allies: Promise<AllieDTO[]>;
 }) {
   const alliesData = use(allies);
-
+  const { open } = useContactModal();
   const availableYears = [
     ...new Set(
       alliesData.map((ally) => {
         return ally.year;
-      }),
+      })
     ),
   ].sort((a, b) => b - a);
 
   const [selectedYear, setSelectedYear] = useState<number>(
-    new Date().getFullYear() - 1,
+    new Date().getFullYear() - 1
   );
 
   const filteredAllies = alliesData.filter(
-    (ally) => ally.year === selectedYear,
+    (ally) => ally.year === selectedYear
   );
 
   const isEmpty = filteredAllies.length === 0;
@@ -85,12 +86,16 @@ export default function AlliesSection({
 
         {/* Grid */}
         <div
-          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 border border-foreground/20 bg-background [&:nth-child(2n)]:sm:border-r-0 [&:nth-last-child(1)]:border-b-0 border-foreground/20 ${isEmpty || isOne ? "border-t-0" : ""}`}
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 border border-foreground/20 bg-background [&:nth-child(2n)]:sm:border-r-0 [&:nth-last-child(1)]:border-b-0 border-foreground/20 ${
+            isEmpty || isOne ? "border-t-0" : ""
+          }`}
         >
           {filteredAllies.map((ally) => (
             <div
               key={ally.id}
-              className={`border-b sm:border-r border-foreground/20 p-8 flex items-center justify-center bg-background min-h-[250px] transition-colors duration-300 hover:bg-base-300/30 group ${isOne ? "border-t-1" : ""}`}
+              className={`border-b sm:border-r border-foreground/20 p-8 flex items-center justify-center bg-background min-h-[250px] transition-colors duration-300 hover:bg-base-300/30 group ${
+                isOne ? "border-t-1" : ""
+              }`}
             >
               <div className="w-full h-full flex items-center justify-center">
                 <Image
@@ -106,12 +111,17 @@ export default function AlliesSection({
 
           {/* CTA Cell - Always last */}
           <div
-            className={`border-b sm:border-r border-foreground/20 p-8 flex flex-col items-center justify-center bg-background min-h-[250px] gap-4 transition-colors duration-300 hover:bg-base-300/30 ${isEmpty || isOne ? "sm:border-t-1" : ""} ${isEmpty ? "border-t-1" : ""}`}
+            className={`border-b sm:border-r border-foreground/20 p-8 flex flex-col items-center justify-center bg-background min-h-[250px] gap-4 transition-colors duration-300 hover:bg-base-300/30 ${
+              isEmpty || isOne ? "sm:border-t-1" : ""
+            } ${isEmpty ? "border-t-1" : ""}`}
           >
             <p className="text-center text-2xl">
               ¿Quieres ser parte del cambio?
             </p>
-            <button className="bg-warning/80 hover:bg-warning text-base-100 font-bold px-8 py-3 rounded-full text-lg md:text-xl xl:text-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
+            <button
+              className="bg-warning/80 hover:bg-warning text-base-100 font-bold px-8 py-3 rounded-full text-lg md:text-xl xl:text-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+              onClick={() => open()}
+            >
               Conviértete en Aliado
             </button>
           </div>

@@ -1,8 +1,10 @@
 import { EventDTO } from "@/data/events";
 import { closeMenu } from "@/lib/close-menu";
 import Link from "next/link";
+import { useContactModal } from "@/components/providers/ContactProvider";
 
 export default function MobileMenu({ events }: { events: EventDTO[] }) {
+  const { open } = useContactModal();
   return (
     <div
       className="dropdown absolute lg:hidden"
@@ -166,7 +168,15 @@ export default function MobileMenu({ events }: { events: EventDTO[] }) {
           </a>
         </li>
         <li role="none">
-          <a href="#" onClick={closeMenu} role="menuitem">
+          <a
+            href="/#contacto"
+            onClick={(e) => {
+              e.preventDefault();
+              closeMenu();
+              open();
+            }}
+            role="menuitem"
+          >
             Contacto
           </a>
         </li>

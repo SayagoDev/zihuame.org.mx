@@ -2,49 +2,6 @@ import Heading from "@/components/Heading";
 import LogoLoop from "@/components/LogoLoop";
 import { AllieService } from "@/data/allies";
 
-const allies = [
-  {
-    alt: "Aliado 1",
-    src: "/images/allies/aliado_1.png",
-    href: "#",
-  },
-  {
-    alt: "Aliado 2",
-    src: "/images/allies/aliado_2.png",
-    href: "#",
-  },
-  {
-    alt: "Aliado 3",
-    src: "/images/allies/aliado_3.png",
-    href: "#",
-  },
-  {
-    alt: "Aliado 4",
-    src: "/images/allies/aliado_4.png",
-    href: "#",
-  },
-  {
-    alt: "Aliado 5",
-    src: "/images/allies/aliado_5.png",
-    href: "#",
-  },
-  {
-    alt: "Aliado 6",
-    src: "/images/allies/aliado_6.png",
-    href: "#",
-  },
-  {
-    alt: "Aliado 7",
-    src: "/images/allies/aliado_7.png",
-    href: "#",
-  },
-  {
-    alt: "Aliado 8",
-    src: "/images/allies/aliado_8.png",
-    href: "#",
-  },
-];
-
 export default async function Allies() {
   const alliesData = await new AllieService().getLastAllie();
 
@@ -72,7 +29,7 @@ export default async function Allies() {
       <p className="text-xl text-center md:text-2xl xl:text-3xl">
         ¿Quieres sumarte a nuestra causa?{" "}
         <a
-          href="#"
+          href="#contacto"
           className="font-medium text-warning relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-[2px] after:bg-warning after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-in-out"
         >
           ¡Contáctanos!

@@ -3,6 +3,7 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY!);
 const EMAIL_TO = process.env.RESEND_CFDI_TO_EMAIL!;
+const EMAIL_FROM = process.env.RESEND_CFDI_FROM_EMAIL!;
 
 export async function POST(request: NextRequest) {
   try {
@@ -20,7 +21,7 @@ export async function POST(request: NextRequest) {
 ${message ? `<p><b>Comentario:</b> ${message}</p>` : ""}`;
 
     const { data, error } = await resend.emails.send({
-      from: "cfdi@zihuame.org.mx",
+      from: EMAIL_FROM,
       to: [EMAIL_TO],
       subject: "[CFDI Donación] Interés en Factura CFDI",
       html,

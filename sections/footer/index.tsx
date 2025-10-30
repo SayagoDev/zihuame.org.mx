@@ -51,7 +51,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="link link-hover block truncate">
+                <a href="#contacto" className="link link-hover block truncate">
                   Contacto
                 </a>
               </li>

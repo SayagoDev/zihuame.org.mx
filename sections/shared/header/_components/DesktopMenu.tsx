@@ -4,9 +4,11 @@ import { useEffect, useRef } from "react";
 import { closeMenu } from "@/lib/close-menu";
 import { EventDTO } from "@/data/events";
 import Link from "next/link";
+import { useContactModal } from "@/components/providers/ContactProvider";
 
 export default function DesktopMenu({ events }: { events: EventDTO[] }) {
   const menuRef = useRef<HTMLDivElement>(null);
+  const { open } = useContactModal();
 
   const closeAllMenus = () => {
     if (menuRef.current) {
@@ -56,7 +58,7 @@ export default function DesktopMenu({ events }: { events: EventDTO[] }) {
         if (isInSubmenu) {
           event.preventDefault();
           const menuItems = Array.from(
-            isInSubmenu.querySelectorAll('a[role="menuitem"]'),
+            isInSubmenu.querySelectorAll('a[role="menuitem"]')
           ) as HTMLElement[];
           const currentIndex = menuItems.indexOf(target);
 
@@ -103,7 +105,7 @@ export default function DesktopMenu({ events }: { events: EventDTO[] }) {
         // Enfocar el primer elemento del submenú cuando se abre
         if (details.open) {
           const firstMenuItem = details.querySelector(
-            'ul[role="menu"] a[role="menuitem"]',
+            'ul[role="menu"] a[role="menuitem"]'
           ) as HTMLElement;
           if (firstMenuItem) {
             setTimeout(() => firstMenuItem.focus(), 0);
@@ -312,7 +314,16 @@ export default function DesktopMenu({ events }: { events: EventDTO[] }) {
           </a>
         </li>
         <li role="none">
-          <a href="#" className="" role="menuitem" tabIndex={0}>
+          <a
+            href="/#contacto"
+            className=""
+            role="menuitem"
+            tabIndex={0}
+            onClick={(e) => {
+              e.preventDefault();
+              open();
+            }}
+          >
             Contacto
           </a>
         </li>
