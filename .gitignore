@@ -10,6 +10,9 @@
 !.yarn/releases
 !.yarn/versions
 
+#MD
+DONATION_SYSTEM.md
+
 # testing
 /coverage
 

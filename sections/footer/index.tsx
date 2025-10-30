@@ -1,5 +1,6 @@
 import Break from "@/components/Break";
-import Button from "@/components/Button";
+
+import { DonationButtonWrapper } from "@/components/DonationButtonWrapper";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -164,12 +165,9 @@ export default function Footer() {
             Aviso de Privacidad
           </a>
         </p>
-        <Button
-          href="#"
-          className="bg-black mt-4 md:mt-0 border-none text-base-100 w-fit"
-        >
+        <DonationButtonWrapper className="bg-black mt-4 md:mt-0 border-none text-base-100 w-fit">
           Quiero Donar
-        </Button>
+        </DonationButtonWrapper>
         <a href="">
           <Image
             src="/images/confio.png"

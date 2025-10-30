@@ -4,17 +4,20 @@ export default function Button({
   href,
   children,
   className,
+  onClick,
 }: {
   href: string;
   children: React.ReactNode;
   className?: string;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }) {
   return (
     <a
       href={href}
+      onClick={onClick}
       className={cn(
         "btn md:btn-md lg:btn-lg rounded-full flex items-center justify-center gap-4",
-        className
+        className,
       )}
     >
       <span className="inline-block w-1.5 h-1.5 rounded-full bg-base-100 align-middle"></span>

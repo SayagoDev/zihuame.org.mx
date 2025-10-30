@@ -48,6 +48,7 @@ export default function AreaCard({
           title={area.title}
           description={area.description}
           href={area.href}
+          programId={area.id}
         />
       )}
     </div>

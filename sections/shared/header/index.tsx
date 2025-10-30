@@ -5,7 +5,7 @@ import DesktopMenu from "./_components/DesktopMenu";
 import MobileMenu from "./_components/MobileMenu";
 import { useEffect, useState } from "react";
 import Break from "@/components/Break";
-import ButtonLine from "@/components/ButtonLine";
+import { DonationButtonWrapper } from "@/components/DonationButtonWrapper";
 import { EventDTO } from "@/data/events";
 
 export default function Header({ events }: { events: EventDTO[] }) {
@@ -66,14 +66,17 @@ export default function Header({ events }: { events: EventDTO[] }) {
         </div>
         <div className="hidden lg:flex lg:justify-end lg:gap-6 2xl:gap-[180px] align-baseline">
           <DesktopMenu events={events} />
-          <ButtonLine href="#">Quiero Donar</ButtonLine>
+          <DonationButtonWrapper variant="buttonLine">
+            Quiero Donar
+          </DonationButtonWrapper>
         </div>
-        <ButtonLine
-          href="#"
+        <DonationButtonWrapper
+          variant="buttonLine"
           className="right-4 text-xl md:text-2xl md:right-12 lg:hidden"
+          initialProgram="general"
         >
           Donar
-        </ButtonLine>
+        </DonationButtonWrapper>
       </header>
       <Break aria-hidden={true} />
     </>

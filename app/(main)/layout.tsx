@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/sections/shared/header";
 import { SanityLive } from "@/sanity/lib/live";
 import { EventService } from "@/data/events";
+import { ClientProviders } from "@/components/providers/ClientProviders";
 
 const gillSans = localFont({
   src: [
@@ -74,14 +75,17 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const events = await new EventService().getEventsForNav();
+
   return (
     <html lang="es">
       <body
         className={`${gillSans.variable} ${komet.variable} ${inter.variable} font-gill-sans`}
       >
-        <Header events={events} />
-        {children}
-        <SanityLive />
+        <ClientProviders>
+          <Header events={events} />
+          {children}
+          <SanityLive />
+        </ClientProviders>
       </body>
     </html>
   );

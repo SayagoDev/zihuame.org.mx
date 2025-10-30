@@ -1,7 +1,7 @@
 import { DataCount } from "@/sections/stats/_components/DataCount";
 import Gallery from "./Gallery";
 import { InterventionDTO } from "@/data/intervention";
-import Link from "next/link";
+import { DonationButtonWrapper } from "./DonationButtonWrapper";
 
 export default function AreaPageTemplate({
   areaData,
@@ -26,12 +26,12 @@ export default function AreaPageTemplate({
             <p className="text-base md:text-xl xl:text-2xl text-center text-base-100">
               {areaData.description}
             </p>
-            <Link
-              href={`/`}
+            <DonationButtonWrapper
               className="btn md:btn-lg xl:btn-xl btn-dash hover:bg-transparent text-base-100"
+              initialProgram={areaData.slug}
             >
               {areaData.buttonLabel}
-            </Link>
+            </DonationButtonWrapper>
           </div>
         </div>
       </section>

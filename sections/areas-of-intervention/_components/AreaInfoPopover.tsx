@@ -1,15 +1,17 @@
-import Button from "@/components/Button";
+import { DonationButtonWrapper } from "@/components/DonationButtonWrapper";
 
 interface AreaInfoPopoverProps {
   title: string;
   description: string;
   href: string;
+  programId: string;
 }
 
 export default function AreaInfoPopover({
   title,
   description,
   href,
+  programId,
 }: AreaInfoPopoverProps) {
   return (
     <div className="mt-6 w-80 sm:w-70 xl:w-90 max-w-sm absolute bottom-0 translate-y-[calc(100%+1.5rem)] left-1/2 transform -translate-x-1/2 z-20">
@@ -54,9 +56,12 @@ export default function AreaInfoPopover({
         </p>
 
         <div className="mt-2">
-          <Button href="/donar" className="btn-sm btn-warning text-base-100">
+          <DonationButtonWrapper
+            className="btn-sm btn-warning text-base-100"
+            initialProgram={programId}
+          >
             Donar Ahora
-          </Button>
+          </DonationButtonWrapper>
         </div>
       </div>
     </div>

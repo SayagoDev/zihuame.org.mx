@@ -1,9 +1,9 @@
 import Break from "@/components/Break";
-import Button from "@/components/Button";
+import { DonationButtonWrapper } from "@/components/DonationButtonWrapper";
 import { IntroService } from "@/data/intro";
 
 export default async function Intro() {
-  const { missionTitle, missionDes, missionDes2, buttonLabel, buttonUrl } =
+  const { missionTitle, missionDes, missionDes2, buttonLabel } =
     await new IntroService().getIntroData();
   return (
     <>
@@ -25,9 +25,12 @@ export default async function Intro() {
             </div>
           </div>
           <div className="flex justify-center md:justify-start xl:justify-end md:col-start-2 md:row-start-3 xl:col-start-4 xl:row-start-1 z-10">
-            <Button href={buttonUrl} className="btn-error text-base-100">
+            <DonationButtonWrapper
+              className="btn-error text-base-100"
+              initialProgram="general"
+            >
               {buttonLabel}
-            </Button>
+            </DonationButtonWrapper>
           </div>
         </div>
       </section>
