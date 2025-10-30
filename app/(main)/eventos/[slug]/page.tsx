@@ -28,17 +28,21 @@ export default async function EventPage({
     <>
       <main className="container max-w-full py-12 md:py-16 lg:pb-30 min-h-[calc(100vh-25rem)] grid justify-items-center gap-8">
         <section className="prose prose-p prose-headings:font-komet prose-headings:text-3xl md:prose-headings:text-4xl xl:prose-headings:text-5xl prose-headings:font-bold prose-bull md:prose-p:text-xl xl:prose-p:text-2xl md:prose-ul:text-xl xl:prose-ul:text-2xl prose-ul:marker:text-base-content prose-p:m-0 text-base-content max-w-400">
-          <Image
-            src={event?.imageUrl || ""}
-            alt={event?.title || ""}
-            width={750}
-            height={400}
-            className="float-right ml-6 sm:w-1/2"
-          />
-          <PortableText value={event?.description || []} />
+          <div className="flex flex-col md:flex-row gap-8">
+            <Image
+              src={event?.imageUrl || ""}
+              alt={event?.title || ""}
+              width={750}
+              height={400}
+              className="md:order-2 md:float-right md:h-full md:w-1/2"
+            />
+            <div className="md:w-1/2">
+              <PortableText value={event?.description || []} />
+            </div>
+          </div>
           <Button
             href={event?.buttonUrl || ""}
-            className="btn bg-primary text-base-100 w-fit mt-8"
+            className="btn bg-primary text-base-100 w-fit"
           >
             {event?.buttonLabel}
           </Button>

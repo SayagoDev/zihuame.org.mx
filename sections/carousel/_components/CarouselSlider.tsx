@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import Image from "next/image";
 
 export interface CarouselImage {
   src: string;
@@ -18,6 +19,7 @@ export default function CarouselSlider({
   images,
   autoPlayInterval = 3000,
 }: CarouselSliderProps) {
+  const ASPECT_RATIO = 400 / 750; // Alto/Ancho objetivo
   const [currentIndex, setCurrentIndex] = useState(0);
   const [containerWidth, setContainerWidth] = useState(0);
   const [mobileContainerWidth, setMobileContainerWidth] = useState(0);
@@ -74,7 +76,7 @@ export default function CarouselSlider({
   const prevSlide = () => {
     if (isAnimatingRef.current) return;
     setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % images.length,
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length
     );
   };
 
@@ -152,12 +154,22 @@ export default function CarouselSlider({
   // Helper para renderizar imagen con o sin enlace
   const renderImage = (image: CarouselImage) => {
     const imgElement = (
-      <img src={image.src} alt={image.alt} className="w-full max-h-[400px]" />
+      <Image
+        src={image.src}
+        alt={image.alt}
+        width={750}
+        height={400}
+        sizes="(max-width: 768px) 100vw, 750px"
+        className="object-cover"
+      />
     );
 
     if (image.url) {
       return (
-        <a href={image.url} className="block w-full h-full cursor-pointer">
+        <a
+          href={image.url}
+          className="relative block w-full h-full cursor-pointer"
+        >
           {imgElement}
         </a>
       );
@@ -177,7 +189,7 @@ export default function CarouselSlider({
         {/* Botón Anterior - Desktop */}
         <button
           onClick={prevSlide}
-          className="w-12 h-12 rounded-full border-2 border-black bg-transparent flex items-center justify-center transition-all hover:scale-102 flex-shrink-0"
+          className="w-12 h-12 rounded-full border-2 border-black bg-transparent flex items-center justify-center transition-all hover:scale-102 shrink-0"
           aria-label="Anterior"
         >
           <svg
@@ -200,6 +212,11 @@ export default function CarouselSlider({
         <div
           ref={desktopContainerRef}
           className="relative overflow-hidden rounded-lg shadow-lg max-w-[750px] w-full"
+          style={{
+            height:
+              Math.min(400, Math.round(containerWidth * ASPECT_RATIO)) ||
+              undefined,
+          }}
         >
           <div ref={desktopCarouselRef} className="flex transition-none">
             {images.map((image, index) => (
@@ -208,7 +225,7 @@ export default function CarouselSlider({
                 ref={(el) => {
                   slideRefs.current[index] = el;
                 }}
-                className="flex-shrink-0 w-full"
+                className="relative shrink-0 w-full h-full"
                 style={{
                   width: containerWidth > 0 ? `${containerWidth}px` : "100%",
                 }}
@@ -222,7 +239,7 @@ export default function CarouselSlider({
         {/* Botón Siguiente - Desktop */}
         <button
           onClick={nextSlide}
-          className="w-12 h-12 rounded-full border-2 border-black bg-transparent flex items-center justify-center transition-all hover:scale-102 flex-shrink-0"
+          className="w-12 h-12 rounded-full border-2 border-black bg-transparent flex items-center justify-center transition-all hover:scale-102 shrink-0"
           aria-label="Siguiente"
         >
           <svg
@@ -248,6 +265,11 @@ export default function CarouselSlider({
         <div
           ref={mobileContainerRef}
           className="relative overflow-hidden rounded-lg shadow-lg"
+          style={{
+            height:
+              Math.min(400, Math.round(mobileContainerWidth * ASPECT_RATIO)) ||
+              undefined,
+          }}
         >
           <div ref={mobileCarouselRef} className="flex transition-none">
             {images.map((image, index) => (
@@ -256,7 +278,7 @@ export default function CarouselSlider({
                 ref={(el) => {
                   slideRefs.current[index] = el;
                 }}
-                className="flex-shrink-0 w-full"
+                className="relative shrink-0 w-full h-full"
                 style={{
                   width:
                     mobileContainerWidth > 0
@@ -274,7 +296,7 @@ export default function CarouselSlider({
         <div className="flex gap-4 justify-center mt-4">
           <button
             onClick={prevSlide}
-            className="w-[120px] h-12 rounded-lg border-1 border-black bg-transparent flex items-center justify-center transition-all hover:scale-102"
+            className="w-[120px] h-12 rounded-lg border border-black bg-transparent flex items-center justify-center transition-all hover:scale-102"
             aria-label="Anterior"
           >
             <svg
@@ -295,7 +317,7 @@ export default function CarouselSlider({
 
           <button
             onClick={nextSlide}
-            className="w-[120px] h-12 rounded-lg border-1 border-black bg-transparent flex items-center justify-center transition-all hover:scale-102"
+            className="w-[120px] h-12 rounded-lg border border-black bg-transparent flex items-center justify-center transition-all hover:scale-102"
             aria-label="Siguiente"
           >
             <svg
@@ -322,7 +344,7 @@ export default function CarouselSlider({
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-5 h-5 rounded-full border-1 transition-all duration-300 relative ${
+            className={`w-5 h-5 rounded-full border transition-all duration-300 relative ${
               index === currentIndex
                 ? "border-black"
                 : "border-black/20 hover:border-black"
