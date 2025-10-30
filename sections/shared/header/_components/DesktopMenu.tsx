@@ -102,6 +102,25 @@ export default function DesktopMenu({ events }: { events: EventDTO[] }) {
       if (summary) {
         summary.setAttribute("aria-expanded", details.open ? "true" : "false");
 
+        // Cerrar otros menus abiertos al mismo nivel
+        if (details.open) {
+          const parentList = details.closest("ul");
+          if (parentList) {
+            const openSiblings = parentList.querySelectorAll(
+              ":scope > li details[open]"
+            );
+            openSiblings.forEach((other) => {
+              if (other !== details) {
+                (other as HTMLDetailsElement).open = false;
+                const otherSummary = other.querySelector("summary");
+                if (otherSummary) {
+                  otherSummary.setAttribute("aria-expanded", "false");
+                }
+              }
+            });
+          }
+        }
+
         // Enfocar el primer elemento del submenú cuando se abre
         if (details.open) {
           const firstMenuItem = details.querySelector(
