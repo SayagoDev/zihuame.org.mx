@@ -1,6 +1,6 @@
 {
   "name": "zihuame.org.mx",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,13 +8,13 @@
     "start": "next start",
     "lint": "eslint",
     "commit": "npx cz",
-    "typegen": "sanity schema extract && pnpm sanity typegen generate",
-    "prepare": "husky"
+    "typegen": "sanity schema extract && pnpm sanity typegen generate"
   },
   "dependencies": {
     "@sanity/color-input": "^4.0.6",
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^1.2.0",
+    "@sanity/preview-url-secret": "^2.1.15",
     "@sanity/vision": "^4.11.0",
     "@stripe/react-stripe-js": "^5.3.0",
     "@stripe/stripe-js": "^8.2.0",
@@ -28,6 +28,7 @@
     "next-sanity": "^11.5.7",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "resend": "^6.3.0",
     "sanity": "^4.11.0",
     "stripe": "^19.2.0",
     "styled-components": "^6.1.19",

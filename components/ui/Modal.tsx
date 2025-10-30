@@ -61,7 +61,12 @@ export function Modal({
       onClose={handleClose}
       onClick={handleBackdropClick}
     >
-      <div className={cn("modal-box w-11/12 max-w-2xl", className)}>
+      <div
+        className={cn(
+          "modal-box w-11/12 sm:w-fit max-w-2xl max-h-[40em] md:max-h-[50em]",
+          className
+        )}
+      >
         {/* Header */}
         <div className="mb-4 flex items-center justify-between">
           {title && <h3 className="text-lg font-bold">{title}</h3>}

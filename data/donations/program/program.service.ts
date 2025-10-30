@@ -47,7 +47,7 @@ class ProgramService {
       // Add general donation option
       {
         id: "general",
-        name: "Donación General",
+        name: "General",
         category: "general",
       },
       ...interventions,

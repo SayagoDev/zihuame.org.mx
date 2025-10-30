@@ -4,9 +4,12 @@ import { Inter } from "next/font/google";
 import Button from "@/components/Button";
 import Footer from "@/sections/footer";
 import Header from "@/sections/shared/header";
+import { ClientProviders } from "@/components/providers/ClientProviders";
 import { EventService } from "@/data/events";
 import { SanityLive } from "@/sanity/lib/live";
 import "./(main)/globals.css";
+
+export const dynamic = "force-static";
 
 const gillSans = localFont({
   src: [
@@ -78,51 +81,52 @@ export default async function NotFound() {
       <body
         className={`${gillSans.variable} ${komet.variable} ${inter.variable} font-gill-sans`}
       >
-        <Header events={events} />
+        <ClientProviders>
+          <Header events={events} />
 
-        <div className="min-h-screen flex flex-col">
-          {/* Contenido principal de la página 404 */}
-          <main className="flex-1 flex items-center justify-center">
-            <div className="container max-w-4xl mx-auto px-4 py-16 text-center">
-              <div className="mb-12">
-                {/* Número 404 estilizado */}
-                <div className="mb-8">
-                  <h1 className="font-komet text-6xl md:text-8xl lg:text-9xl text-error font-black leading-none">
-                    404
-                  </h1>
-                  <div className="w-24 h-1 bg-error mx-auto mt-4"></div>
+          <div className="min-h-screen flex flex-col">
+            {/* Contenido principal de la página 404 */}
+            <main className="flex-1 flex items-center justify-center">
+              <div className="container max-w-4xl mx-auto px-4 py-16 text-center">
+                <div className="mb-12">
+                  {/* Número 404 estilizado */}
+                  <div className="mb-8">
+                    <h1 className="font-komet text-6xl md:text-8xl lg:text-9xl text-error font-black leading-none">
+                      404
+                    </h1>
+                    <div className="w-24 h-1 bg-error mx-auto mt-4"></div>
+                  </div>
+                </div>
+
+                {/* Mensaje principal */}
+                <div className="mb-12 space-y-6">
+                  <h2 className="font-komet text-2xl md:text-3xl lg:text-4xl text-base-content font-bold">
+                    ¡Oops! Página no encontrada
+                  </h2>
+
+                  <p className="text-base md:text-lg lg:text-xl text-base-content/80 max-w-2xl mx-auto leading-relaxed">
+                    La página que buscas no existe o ha sido movida. Pero no te
+                    preocupes, puedes encontrar lo que necesitas explorando
+                    nuestras áreas de intervención y proyectos.
+                  </p>
+                </div>
+
+                {/* Botones de navegación */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                  <Button
+                    href="/"
+                    className="btn-primary text-primary-content font-medium"
+                  >
+                    Ir al Inicio
+                  </Button>
                 </div>
               </div>
+            </main>
 
-              {/* Mensaje principal */}
-              <div className="mb-12 space-y-6">
-                <h2 className="font-komet text-2xl md:text-3xl lg:text-4xl text-base-content font-bold">
-                  ¡Oops! Página no encontrada
-                </h2>
-
-                <p className="text-base md:text-lg lg:text-xl text-base-content/80 max-w-2xl mx-auto leading-relaxed">
-                  La página que buscas no existe o ha sido movida. Pero no te
-                  preocupes, puedes encontrar lo que necesitas explorando
-                  nuestras áreas de intervención y proyectos.
-                </p>
-              </div>
-
-              {/* Botones de navegación */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-                <Button
-                  href="/"
-                  className="btn-primary text-primary-content font-medium"
-                >
-                  Ir al Inicio
-                </Button>
-              </div>
-            </div>
-          </main>
-
-          {/* Footer */}
-          <Footer />
-        </div>
-
+            {/* Footer */}
+            <Footer />
+          </div>
+        </ClientProviders>
         <SanityLive />
       </body>
     </html>

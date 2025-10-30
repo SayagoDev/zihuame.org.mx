@@ -2,9 +2,16 @@ import AreaPageTemplate from "@/components/AreaPageTemplate";
 import { InterventionService } from "@/data/intervention";
 import Footer from "@/sections/footer";
 
+export const dynamic = "force-static";
+
 export default async function SaludPage() {
   const areaData = await new InterventionService().getInterventionBySlug(
-    "salud",
+    "salud"
+  );
+
+  console.log(
+    crypto.randomUUID().slice(0, 5) +
+      ` >>> Rerendered the event page cache for /${areaData.slug} <<<`
   );
 
   return (

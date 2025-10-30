@@ -4,6 +4,13 @@ import Footer from "@/sections/footer";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
 
+// export const dynamic = "force-static";
+
+export async function generateStaticParams() {
+  const events = await new EventService().getEventsForNav();
+  return events.map(({ slug }) => slug);
+}
+
 export default async function EventPage({
   params,
 }: {
@@ -11,6 +18,12 @@ export default async function EventPage({
 }) {
   const { slug } = await params;
   const event = await new EventService().getEventBySlug(slug);
+
+  console.log(
+    crypto.randomUUID().slice(0, 5) +
+      ` >>> Rerendered the event page cache for /${slug} <<<`
+  );
+
   return (
     <>
       <main className="container max-w-full py-12 md:py-16 lg:pb-30 min-h-[calc(100vh-25rem)] grid justify-items-center gap-8">

@@ -20,7 +20,7 @@ export const DonorSchema = z.object({
     .min(1, "El apellido es requerido")
     .max(50, "Máximo 50 caracteres"),
   secondLastName: z.string().max(50).optional(),
-  email: z.string().email("Email inválido"),
+  email: z.email({ error: "Email inválido" }),
   phone: z
     .string()
     .trim()

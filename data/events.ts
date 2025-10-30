@@ -2,6 +2,7 @@ import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
 import { BlockContent } from "@/sanity.types";
 import { imageUrl } from "@/lib/imageUrl";
+import { backendClient } from "@/sanity/lib/backendClient";
 
 // Tipos específicos para las respuestas de las queries
 type EventCarouselQueryResponse = {
@@ -65,7 +66,7 @@ export interface EventCarouselDTO {
 }
 
 function mapEventCarouselToDTO(
-  event: EventCarouselQueryResponse,
+  event: EventCarouselQueryResponse
 ): EventCarouselDTO {
   return {
     id: event._id,
@@ -87,7 +88,7 @@ function mapEventToDTO(event: EventFullQueryResponse): EventDTO {
     sponsors:
       event.sponsors
         ?.map((sponsor) =>
-          sponsor.asset?._ref ? imageUrl(sponsor.asset).url() : "",
+          sponsor.asset?._ref ? imageUrl(sponsor.asset).url() : ""
         )
         .filter((url) => url !== "") || [],
   };
@@ -109,7 +110,7 @@ function mapEventNavToDTO(event: EventNavQueryResponse): EventDTO {
 class EventDAL {
   async getAllEvents(): Promise<EventDTO[]> {
     const ALL_EVENTS_QUERY = defineQuery(
-      `*[_type == "event"] | order(name asc)`,
+      `*[_type == "event"] | order(name asc)`
     );
 
     try {
@@ -117,8 +118,8 @@ class EventDAL {
         query: ALL_EVENTS_QUERY,
       });
 
-      return events.data.map((event) =>
-        mapEventToDTO(event as EventFullQueryResponse),
+      return events.data.map((event: EventFullQueryResponse) =>
+        mapEventToDTO(event)
       );
     } catch (error) {
       console.error("Error fetching events data:", error);
@@ -128,7 +129,7 @@ class EventDAL {
 
   async getEventsCarousel(): Promise<EventCarouselDTO[]> {
     const EVENT_CAROUSEL_QUERY = defineQuery(
-      `*[_type == "event"]{_id,slug,image,name} | order(name asc)`,
+      `*[_type == "event"]{_id,slug,image,name} | order(name asc)`
     );
 
     try {
@@ -136,8 +137,8 @@ class EventDAL {
         query: EVENT_CAROUSEL_QUERY,
       });
 
-      return events.data.map((event) =>
-        mapEventCarouselToDTO(event as EventCarouselQueryResponse),
+      return events.data.map((event: EventCarouselQueryResponse) =>
+        mapEventCarouselToDTO(event)
       );
     } catch (error) {
       console.error("Error fetching event carousel data:", error);
@@ -147,7 +148,7 @@ class EventDAL {
 
   async getEventBySlug(slug: string): Promise<EventDTO | null> {
     const EVENT_BY_SLUG_QUERY = defineQuery(
-      `*[_type == "event" && slug.current == $slug][0]`,
+      `*[_type == "event" && slug.current == $slug][0]`
     );
 
     try {
@@ -167,7 +168,7 @@ class EventDAL {
 
   async getEventsForNav(): Promise<EventDTO[]> {
     const EVENTS_FOR_NAV_QUERY = defineQuery(
-      `*[_type == "event"]{_id,slug,name} | order(name asc)`,
+      `*[_type == "event"]{_id,slug,name} | order(name asc)`
     );
 
     try {
@@ -175,8 +176,8 @@ class EventDAL {
         query: EVENTS_FOR_NAV_QUERY,
       });
 
-      return events.data.map((event) =>
-        mapEventNavToDTO(event as EventNavQueryResponse),
+      return events.data.map((event: EventNavQueryResponse) =>
+        mapEventNavToDTO(event)
       );
     } catch (error) {
       console.error("Error fetching events for navigation:", error);

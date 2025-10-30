@@ -60,15 +60,15 @@ class AllieDAL {
               }
             }
           },
-      }`,
+      }`
     );
     try {
       const allies = await sanityFetch({
         query: QUERY_ALL_ALLIES,
       });
 
-      return allies.data.flatMap((ally) =>
-        mapAlliesToDTO(ally as AlliesQueryResponse),
+      return allies.data.flatMap((ally: AlliesQueryResponse) =>
+        mapAlliesToDTO(ally)
       );
     } catch (error) {
       console.error("Error fetching allies data:", error);
@@ -89,7 +89,7 @@ class AllieDAL {
             }
           },
       } | order(year desc)[0]
-      `,
+      `
     );
     try {
       const allies = await sanityFetch({

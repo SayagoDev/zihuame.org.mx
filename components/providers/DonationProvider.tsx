@@ -53,7 +53,7 @@ interface ModalConfig {
 type DonationContextType = DonationModalState & DonationModalActions;
 
 const DonationContext = createContext<DonationContextType | undefined>(
-  undefined,
+  undefined
 );
 
 const INITIAL_STATE: DonationModalState = {

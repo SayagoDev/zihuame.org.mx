@@ -38,9 +38,8 @@ const STEP_CONFIG: Record<
   [DonationStep.SUCCESS]: { title: "Éxito", icon: CheckCircle2 },
 };
 
-// Orden de los pasos visibles en el stepper (sin CONVERSION)
+// Orden de los pasos visibles en el stepper (sin CFDI ni CONVERSION)
 const VISIBLE_STEPS: DonationStep[] = [
-  DonationStep.CFDI,
   DonationStep.AMOUNT,
   DonationStep.DONOR,
   DonationStep.PAYMENT,
@@ -65,7 +64,7 @@ export function Stepper({
   });
 
   return (
-    <div className="w-full py-4">
+    <div className="w-full overflow-x-hidden">
       <ul className="steps steps-horizontal w-full">
         {steps.map((step, index) => {
           const Icon = step.icon;

@@ -123,22 +123,38 @@ export default function Footer() {
           <nav className="w-fit">
             <ul className="space-y-1">
               <li>
-                <a href="#" className="block truncate link link-hover">
+                <a
+                  href="https://www.facebook.com/zihuame.mochilla"
+                  className="block truncate link link-hover"
+                  target="_blank"
+                >
                   Facebook
                 </a>
               </li>
               <li>
-                <a href="#" className="block truncate link link-hover">
+                <a
+                  href="https://www.instagram.com/zihuamemochillaac/"
+                  className="block truncate link link-hover"
+                  target="_blank"
+                >
                   Instagram
                 </a>
               </li>
               <li>
-                <a href="#" className="block truncate link link-hover">
+                <a
+                  href="https://www.youtube.com/channel/UCmJPAH4rvSYqiFZYnoW3cAQ"
+                  className="block truncate link link-hover"
+                  target="_blank"
+                >
                   Youtube
                 </a>
               </li>
               <li>
-                <a href="#" className="block truncate link link-hover">
+                <a
+                  href="https://www.linkedin.com/company/zihuamemochillaac/posts/?feedView=all"
+                  className="block truncate link link-hover"
+                  target="_blank"
+                >
                   LinkedIn
                 </a>
               </li>
@@ -161,7 +177,11 @@ export default function Footer() {
             sáyago;dev{" "}
           </a>
           |{" "}
-          <a href="#" className="link link-hover text-nowrap">
+          <a
+            href="https://drive.google.com/file/d/1-Zk5TqdzeKRXUhvmhfZpChwCSwM87DUe/view?usp=sharing"
+            className="link link-hover text-nowrap"
+            target="_blank"
+          >
             Aviso de Privacidad
           </a>
         </p>

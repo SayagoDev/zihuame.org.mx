@@ -60,7 +60,7 @@ class ReportDAL {
                 hex
               }
             }
-      } | order(title desc)`,
+      } | order(title desc)`
     );
 
     try {
@@ -68,8 +68,8 @@ class ReportDAL {
         query: ALL_REPORTS_QUERY,
       });
 
-      return reports.data.map((report) =>
-        mapReportToDTO(report as ReportQueryResponse),
+      return reports.data.map((report: ReportQueryResponse) =>
+        mapReportToDTO(report)
       );
     } catch (error) {
       console.error("Error fetching reports data:", error);

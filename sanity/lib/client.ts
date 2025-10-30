@@ -10,7 +10,9 @@ export const client = createClient({
   stega: {
     studioUrl:
       process.env.NODE_ENV === "production"
-        ? `${process.env.PRODUCTION_URL || "https://zihuame.org.mx"}/studio`
-        : `${process.env.NEXT_PUBLIC_BASE_URL}/studio`,
+        ? `${
+            process.env.NEXT_PUBLIC_BASE_URL || "https://zihuame.org.mx"
+          }/studio`
+        : `${process.env.NEXT_PUBLIC_DEV_URL}/studio`,
   },
 });

@@ -6,6 +6,9 @@ import Header from "@/sections/shared/header";
 import { SanityLive } from "@/sanity/lib/live";
 import { EventService } from "@/data/events";
 import { ClientProviders } from "@/components/providers/ClientProviders";
+import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity/visual-editing";
+import DisableDraftMode from "@/components/DisableDraftMode";
 
 const gillSans = localFont({
   src: [
@@ -67,6 +70,16 @@ export const metadata: Metadata = {
   title: "Zihuame Mochilla | Transformando Vidas",
   description:
     "Zihuame Mochilla es una organización sin fines de lucro dedicada a transformar vidas a través de la educación, brindando oportunidades de desarrollo y crecimiento a comunidades vulnerables.",
+  openGraph: {
+    images: [
+      {
+        url: "/opengraph-image.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Zihuame Mochilla",
+      },
+    ],
+  },
 };
 
 export default async function RootLayout({
@@ -78,13 +91,37 @@ export default async function RootLayout({
 
   return (
     <html lang="es">
+      <head>
+        <link
+          rel="icon"
+          type="image/png"
+          href="/favicon-96x96.png"
+          sizes="96x96"
+        />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <meta name="apple-mobile-web-app-title" content="Zihuame" />
+        <link rel="manifest" href="/site.webmanifest" />
+      </head>
       <body
         className={`${gillSans.variable} ${komet.variable} ${inter.variable} font-gill-sans`}
       >
+        {(await draftMode()).isEnabled && (
+          <>
+            <DisableDraftMode />
+            <VisualEditing />
+            <SanityLive />
+          </>
+        )}
+
         <ClientProviders>
           <Header events={events} />
           {children}
-          <SanityLive />
         </ClientProviders>
       </body>
     </html>

@@ -2,9 +2,16 @@ import AreaPageTemplate from "@/components/AreaPageTemplate";
 import { InterventionService } from "@/data/intervention";
 import Footer from "@/sections/footer";
 
+export const dynamic = "force-static";
+
 export default async function DerechosHumanosPage() {
   const areaData = await new InterventionService().getInterventionBySlug(
-    "derechos-humanos",
+    "derechos-humanos"
+  );
+
+  console.log(
+    crypto.randomUUID().slice(0, 5) +
+      ` >>> Rerendered the event page cache for /${areaData.slug} <<<`
   );
 
   return (

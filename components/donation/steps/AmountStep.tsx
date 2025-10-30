@@ -28,8 +28,6 @@ export function AmountStep({ onNext, onBack }: AmountStepProps) {
     donation.coverTransactionCosts ?? true
   );
 
-  console.log("selectedProgram", selectedProgram);
-  console.log("selectedProgramData", programs);
   const selectedProgramData = programs.find((p) => p.id === selectedProgram);
 
   // Calcular monto final solo si amount es válido (>0)
@@ -61,11 +59,6 @@ export function AmountStep({ onNext, onBack }: AmountStepProps) {
       alert("El monto mínimo es $100 MXN");
       return;
     }
-
-    // Debug: verificar datos
-    console.log("Selected program:", selectedProgram);
-    console.log("Selected program data:", selectedProgramData);
-    console.log("Programs available:", programs);
 
     if (!selectedProgramData) {
       console.error("No se encontró información del programa seleccionado");

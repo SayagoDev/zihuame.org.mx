@@ -3,7 +3,14 @@ import AnnualReports from "@/sections/annual-reports";
 import Footer from "@/sections/footer";
 import Image from "next/image";
 
+export const dynamic = "force-static";
+
 export default function TransparencyPage() {
+  console.log(
+    crypto.randomUUID().slice(0, 5) +
+      ` >>> Rerendered the event page cache for /transparencia <<<`
+  );
+
   return (
     <>
       <main className="container max-w-full py-12 md:py-16 lg:py-20 xl:py-30">

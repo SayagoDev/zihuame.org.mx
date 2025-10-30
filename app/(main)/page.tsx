@@ -10,8 +10,16 @@ import Allies from "@/sections/allies";
 import Footer from "@/sections/footer";
 import { StatsService } from "@/data/stats";
 
+export const dynamic = "force-static";
+
 export default function HomePage() {
   const statsData = new StatsService().getStatsData();
+
+  console.log(
+    crypto.randomUUID().slice(0, 5) +
+      ` >>> Rerendered the event page cache for / <<<`
+  );
+
   return (
     <>
       <Home />

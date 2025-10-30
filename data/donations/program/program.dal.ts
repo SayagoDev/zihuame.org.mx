@@ -24,7 +24,8 @@ class ProgramDAL {
   }
 
   async findActive(): Promise<ProgramDTO[]> {
-    return Array.from(this.programs.values()).filter((p) => p.isActive);
+    // Currently all programs are considered active; adjust when schema includes status
+    return Array.from(this.programs.values());
   }
 
   async create(data: ProgramDTO): Promise<ProgramDTO> {

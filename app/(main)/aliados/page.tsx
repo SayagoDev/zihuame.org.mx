@@ -2,8 +2,16 @@ import { AllieService } from "@/data/allies";
 import AlliesGrid from "@/sections/allies/AlliesGrid";
 import Footer from "@/sections/footer";
 
+export const dynamic = "force-static";
+
 export default function AlliesPage() {
   const allies = new AllieService().getAllAllies();
+
+  console.log(
+    crypto.randomUUID().slice(0, 5) +
+      ` >>> Rerendered the event page cache for /aliados <<<`
+  );
+
   return (
     <>
       <main className="min-h-screen">
