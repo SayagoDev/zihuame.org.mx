@@ -63,7 +63,7 @@ export function Modal({
     >
       <div
         className={cn(
-          "modal-box w-11/12 sm:w-fit max-w-2xl max-h-[40em] md:max-h-[40em]",
+          "modal-box w-11/12 sm:w-fit max-w-2xl max-h-[40em] md:max-h-[45em]",
           className
         )}
       >

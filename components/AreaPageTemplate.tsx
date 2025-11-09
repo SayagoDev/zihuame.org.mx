@@ -2,6 +2,7 @@ import { DataCount } from "@/sections/stats/_components/DataCount";
 import Gallery from "./Gallery";
 import { InterventionDTO } from "@/data/intervention";
 import { DonationButtonWrapper } from "./DonationButtonWrapper";
+import Image from "next/image";
 
 export default function AreaPageTemplate({
   areaData,
@@ -12,12 +13,14 @@ export default function AreaPageTemplate({
   return (
     <>
       <section className="container max-w-full py-12 md:py-16 lg:pb-[7.5rem]">
-        <div
-          className="relative flex flex-col justify-end items-center bg-cover bg-no-repeat bg-[center_35%] top-0 left-0 w-full h-[clamp(20rem,_70vh,_48rem)] rounded-xl"
-          style={{
-            backgroundImage: `url(${areaData.imageUrl})`,
-          }}
-        >
+        <div className="relative flex flex-col justify-end items-center top-0 left-0 w-full h-[clamp(20rem,_70vh,_48rem)] rounded-xl overflow-hidden">
+          <Image
+            src={areaData.imageUrl}
+            alt={areaData.title}
+            fill
+            className="object-cover"
+            style={{ objectPosition: "center 35%" }}
+          />
           <div className="absolute top-0 left-0 w-full h-full rounded-xl pointer-events-none bg-linear-to-t from-black/100 to-transparent"></div>
           <div className="z-10 p-8 flex flex-col justify-center items-center max-w-[50rem] gap-3">
             <h1 className="font-komet font-black text-3xl sm:text-4xl md:text-6xl text-base-100 uppercase text-center">

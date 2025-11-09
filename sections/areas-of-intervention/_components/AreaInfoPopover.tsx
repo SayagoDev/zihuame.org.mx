@@ -1,4 +1,5 @@
 import { DonationButtonWrapper } from "@/components/DonationButtonWrapper";
+import Link from "next/link";
 
 interface AreaInfoPopoverProps {
   title: string;
@@ -28,7 +29,7 @@ export default function AreaInfoPopover({
         <h3 className="sr-only">{title}</h3>
         <p className="text-lg md:text-xl xl:text-2xl">
           {description}
-          <a
+          <Link
             href={href}
             className="text-orange-500 font-medium cursor-pointer hover:text-orange-600 transition-colors ml-1"
             aria-label={`Saber más sobre ${title}`}
@@ -52,7 +53,7 @@ export default function AreaInfoPopover({
                 />
               </svg>
             </span>
-          </a>
+          </Link>
         </p>
 
         <div className="mt-2">
