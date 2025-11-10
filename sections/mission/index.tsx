@@ -39,10 +39,8 @@ export default function Mission() {
                     Nuestra Misión
                   </h3>
                   <p className="text-base md:text-lg lg:text-xl leading-relaxed">
-                    Facilitar el desarrollo pleno y autogestivo de las
-                    comunidades, respetando su diversidad y fortaleciendo sus
-                    capacidades para que sean los principales agentes de su
-                    propio cambio.
+                    Facilitar el desarrollo pleno de comunidades y personas de
+                    pueblos originarios.
                   </p>
                 </div>
               </div>
@@ -57,9 +55,10 @@ export default function Mission() {
                     Nuestra Visión
                   </h3>
                   <p className="text-base md:text-lg lg:text-xl leading-relaxed">
-                    Construir un futuro donde las personas y comunidades
-                    indígenas gocen de igualdad de oportunidades, preserven su
-                    identidad cultural y vivan con dignidad y plenos derechos.
+                    Contribuimos para la igualdad de oportunidades de personas y
+                    comunidades indígenas, quienes mejoran sus condiciones de
+                    vida y preservan su identidad desde una perspectiva
+                    intercultural, de género y de derechos humanos.
                   </p>
                 </div>
               </div>
@@ -74,24 +73,31 @@ export default function Mission() {
                     Nuestros Valores
                   </h3>
                   <p className="text-base md:text-lg lg:text-xl leading-relaxed">
-                    Actuamos siempre desde el{" "}
+                    Actuamos desde los valores de{" "}
                     <span className="bg-accent px-1 pt-1 rounded-md">
                       Respeto
                     </span>
-                    , la{" "}
+                    ,{" "}
                     <span className="bg-accent px-1 pt-1 rounded-md">
                       Igualdad
                     </span>
-                    , la{" "}
+                    ,{" "}
+                    <span className="bg-accent px-1 pt-1 rounded-md">
+                      Autonomía
+                    </span>
+                    ,{" "}
                     <span className="bg-accent px-1 pt-1 rounded-md">
                       Solidaridad
+                    </span>
+                    ,{" "}
+                    <span className="bg-accent px-1 pt-1 rounded-md">
+                      Honestidad
                     </span>{" "}
-                    y la{" "}
+                    y{" "}
                     <span className="bg-accent px-1 pt-1 rounded-md">
                       Cooperación
                     </span>
-                    , creyendo en la autonomía y la honestidad como pilares de
-                    nuestro trabajo.
+                    .
                   </p>
                 </div>
               </div>

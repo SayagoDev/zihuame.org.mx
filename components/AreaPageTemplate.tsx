@@ -20,6 +20,7 @@ export default function AreaPageTemplate({
             fill
             className="object-cover"
             style={{ objectPosition: "center 35%" }}
+            priority
           />
           <div className="absolute top-0 left-0 w-full h-full rounded-xl pointer-events-none bg-linear-to-t from-black/100 to-transparent"></div>
           <div className="z-10 p-8 flex flex-col justify-center items-center max-w-[50rem] gap-3">
