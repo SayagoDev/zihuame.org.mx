@@ -12,7 +12,7 @@ export default async function Intro() {
           <div className="relative md:col-start-1 md:row-start-1 xl:col-start-1 xl:row-start-1 w-fit h-fit">
             <div className="absolute left-0 top-1/2 -translate-y-[12px] w-[18px] h-[18px] bg-primary rounded-full animate-pulse"></div>
             <h2 className="text-xl pl-6 font-medium text-primary">
-              Nuestra Misión
+              Nuestro Propósito
             </h2>
           </div>
           <h2 className="md:w-55 h-fit uppercase text-lg md:col-start-1 md:row-start-2 xl:col-start-2 xl:row-start-1">
