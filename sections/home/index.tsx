@@ -26,6 +26,7 @@ export default function Home() {
               width={683}
               height={524}
               className="relative -top-8 lg:-top-10 -right-15 lg:-right-20 max-w-full h-auto"
+              priority
             />
           </div>
         </div>
